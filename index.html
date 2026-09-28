@@ -17,6 +17,9 @@
       darkMode: 'class',
       theme: {
         extend: {
+          screens: {
+            'xs': '420px',
+          },
           fontFamily: {
             sans: [
               '-apple-system',
@@ -54,6 +57,26 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+      padding-top: env(safe-area-inset-top, 0);
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+
+    /* Mobile touch and tap optimizations */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    button, select, input {
+      touch-action: manipulation;
+    }
+
+    /* Fluid swipeable pill bars without scrollbar obstruction */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* Ambient Monochrome Fluid Glow Orbs */
@@ -261,13 +284,13 @@
     <div class="liquid-orb liquid-orb-2"></div>
   </div>
 
-  <header class="sticky top-0 z-40 border-b border-white/[0.07] bg-[#08090b]/80 backdrop-blur-2xl">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+  <header class="sticky top-0 z-40 border-b border-white/[0.07] bg-[#08090b]/85 backdrop-blur-2xl">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-4">
       
       <!-- Brand Logo & Header -->
-      <div class="flex items-center space-x-3">
-        <div class="w-9 h-9 rounded-2xl liquid-glass flex items-center justify-center p-1.5 shadow-sm border border-white/15 flex-shrink-0 group hover:border-white/30 transition">
-          <svg viewBox="0 0 100 100" class="w-6 h-6 drop-shadow-[0_0_8px_rgba(255,255,255,0.35)]" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div class="flex items-center space-x-2 sm:space-x-3 min-w-0">
+        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-2xl liquid-glass flex items-center justify-center p-1 sm:p-1.5 shadow-sm border border-white/15 flex-shrink-0 group hover:border-white/30 transition">
+          <svg viewBox="0 0 100 100" class="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-[0_0_8px_rgba(255,255,255,0.35)]" fill="none" xmlns="http://www.w3.org/2000/svg">
             <!-- Primogem 8 Facets -->
             <polygon points="50,4 50,31 39,39" fill="url(#pg-facet-1)" />
             <polygon points="50,4 61,39 50,31" fill="url(#pg-facet-2)" />
@@ -315,81 +338,83 @@
             </defs>
           </svg>
         </div>
-        <div>
-          <div class="flex items-center gap-2.5">
-            <h1 class="font-bold text-sm sm:text-base tracking-tight text-white drop-shadow-sm">Genshin Impact India Abyss Tournament</h1>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-medium tracking-wide bg-white/[0.07] text-neutral-300 border border-white/10">5.0 COST CAP</span>
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5 sm:gap-2.5">
+            <h1 class="font-bold text-xs sm:text-base tracking-tight text-white drop-shadow-sm truncate max-w-[135px] xs:max-w-[210px] sm:max-w-none" title="Genshin Impact India Abyss Tournament">Genshin Impact India Abyss Tournament</h1>
+            <span class="px-1.5 py-0.5 sm:px-2 rounded-full text-[9px] sm:text-[10px] font-mono font-medium tracking-wide bg-white/[0.07] text-neutral-300 border border-white/10 whitespace-nowrap flex-shrink-0">5.0 CAP</span>
           </div>
-          <p class="text-[11px] text-neutral-400 font-medium hidden sm:block">Floor 12 First &amp; Second Half Roster Cost Calculator</p>
+          <p class="text-[10px] sm:text-[11px] text-neutral-400 font-medium hidden sm:block">Floor 12 First &amp; Second Half Roster Cost Calculator</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-2 text-xs">
-        <button id="rules-btn" class="liquid-btn px-3.5 py-1.5 rounded-full text-neutral-200 font-medium flex items-center gap-1.5">
+      <div class="flex items-center gap-1.5 sm:gap-2 text-xs flex-shrink-0">
+        <button id="rules-btn" class="liquid-btn px-2.5 sm:px-3.5 py-1.5 rounded-full text-neutral-200 font-medium flex items-center gap-1 sm:gap-1.5" title="Rules & Formulas">
           <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-          <span class="hidden sm:inline">Rules &amp; Formulas</span>
-          <span class="sm:hidden">Rules</span>
+          <span class="hidden md:inline">Rules &amp; Formulas</span>
+          <span class="hidden xs:inline md:hidden">Rules</span>
         </button>
 
-        <button id="presets-btn" class="liquid-btn px-3.5 py-1.5 rounded-full text-neutral-200 font-medium flex items-center gap-1.5">
+        <button id="presets-btn" class="liquid-btn px-2.5 sm:px-3.5 py-1.5 rounded-full text-neutral-200 font-medium flex items-center gap-1 sm:gap-1.5" title="Sample Teams">
           <span class="text-neutral-400 text-xs">✦</span>
-          <span>Sample Teams</span>
+          <span class="hidden sm:inline">Sample Teams</span>
+          <span class="hidden xs:inline sm:hidden">Presets</span>
         </button>
 
-        <button id="copy-match-btn" class="liquid-btn-primary px-4 py-1.5 rounded-full font-semibold flex items-center gap-1.5 active:scale-95 transition-transform">
+        <button id="copy-match-btn" class="liquid-btn-primary px-3 sm:px-4 py-1.5 rounded-full font-semibold flex items-center gap-1 sm:gap-1.5 active:scale-95 transition-transform" title="Share Lineup">
           <svg class="w-3.5 h-3.5 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
-          <span>Share Lineup</span>
+          <span class="hidden xs:inline">Share</span>
+          <span class="hidden sm:inline"> Lineup</span>
         </button>
       </div>
 
     </div>
   </header>
 
-  <section class="border-b border-white/[0.06] bg-black/20 backdrop-blur-2xl py-4 px-4 sm:px-6 relative z-10">
-    <div class="max-w-7xl mx-auto space-y-3.5">
+  <section class="border-b border-white/[0.06] bg-black/20 backdrop-blur-2xl py-3 sm:py-4 px-3 sm:px-6 relative z-10">
+    <div class="max-w-7xl mx-auto space-y-3">
       
       <!-- Dual Half Quick Gauges -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3.5">
         
         <!-- First Half Mini Meter -->
-        <div class="liquid-glass p-3.5 flex items-center justify-between gap-4">
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center font-bold text-xs text-neutral-200">
+        <div class="liquid-glass p-3 sm:p-3.5 flex items-center justify-between gap-3 sm:gap-4">
+          <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center font-bold text-xs text-neutral-200 flex-shrink-0">
               1st
             </div>
-            <div>
-              <div class="flex items-center gap-2">
-                <span class="font-bold text-xs sm:text-sm text-white drop-shadow-sm" id="t1-mini-name">First Half</span>
-                <span id="t1-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/[0.08] text-neutral-300 border border-white/10">LEGAL</span>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5 sm:gap-2">
+                <span class="font-bold text-xs sm:text-sm text-white drop-shadow-sm truncate" id="t1-mini-name">First Half</span>
+                <span id="t1-badge" class="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-white/[0.08] text-neutral-300 border border-white/10 flex-shrink-0">LEGAL</span>
               </div>
-              <p class="text-[11px] text-neutral-400 font-medium" id="t1-summary-sub">0 of 4 Characters Selected</p>
+              <p class="text-[10px] sm:text-[11px] text-neutral-400 font-medium truncate" id="t1-summary-sub">0 of 4 Characters Selected</p>
             </div>
           </div>
-          <div class="text-right">
-            <div class="font-mono text-sm sm:text-base font-bold tracking-tight text-white tabular-nums" id="t1-mini-cost">0.0 <span class="text-xs font-normal text-neutral-400 font-sans">/ 5.0</span></div>
-            <div class="w-28 sm:w-32 liquid-track h-2 rounded-full overflow-hidden mt-1.5 p-[1px]">
+          <div class="text-right flex-shrink-0">
+            <div class="font-mono text-xs sm:text-base font-bold tracking-tight text-white tabular-nums" id="t1-mini-cost">0.0 <span class="text-[10px] sm:text-xs font-normal text-neutral-400 font-sans">/ 5.0</span></div>
+            <div class="w-24 sm:w-32 liquid-track h-2 rounded-full overflow-hidden mt-1.5 p-[1px]">
               <div id="t1-mini-bar" class="h-full bg-gradient-to-r from-neutral-400 to-white rounded-full liquid-fill-glow transition-all duration-300 ease-out" style="width: 0%"></div>
             </div>
           </div>
         </div>
 
         <!-- Second Half Mini Meter -->
-        <div class="liquid-glass p-3.5 flex items-center justify-between gap-4">
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center font-bold text-xs text-neutral-200">
+        <div class="liquid-glass p-3 sm:p-3.5 flex items-center justify-between gap-3 sm:gap-4">
+          <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center font-bold text-xs text-neutral-200 flex-shrink-0">
               2nd
             </div>
-            <div>
-              <div class="flex items-center gap-2">
-                <span class="font-bold text-xs sm:text-sm text-white drop-shadow-sm" id="t2-mini-name">Second Half</span>
-                <span id="t2-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/[0.08] text-neutral-300 border border-white/10">LEGAL</span>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5 sm:gap-2">
+                <span class="font-bold text-xs sm:text-sm text-white drop-shadow-sm truncate" id="t2-mini-name">Second Half</span>
+                <span id="t2-badge" class="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-white/[0.08] text-neutral-300 border border-white/10 flex-shrink-0">LEGAL</span>
               </div>
-              <p class="text-[11px] text-neutral-400 font-medium" id="t2-summary-sub">0 of 4 Characters Selected</p>
+              <p class="text-[10px] sm:text-[11px] text-neutral-400 font-medium truncate" id="t2-summary-sub">0 of 4 Characters Selected</p>
             </div>
           </div>
-          <div class="text-right">
-            <div class="font-mono text-sm sm:text-base font-bold tracking-tight text-white tabular-nums" id="t2-mini-cost">0.0 <span class="text-xs font-normal text-neutral-400 font-sans">/ 5.0</span></div>
-            <div class="w-28 sm:w-32 liquid-track h-2 rounded-full overflow-hidden mt-1.5 p-[1px]">
+          <div class="text-right flex-shrink-0">
+            <div class="font-mono text-xs sm:text-base font-bold tracking-tight text-white tabular-nums" id="t2-mini-cost">0.0 <span class="text-[10px] sm:text-xs font-normal text-neutral-400 font-sans">/ 5.0</span></div>
+            <div class="w-24 sm:w-32 liquid-track h-2 rounded-full overflow-hidden mt-1.5 p-[1px]">
               <div id="t2-mini-bar" class="h-full bg-gradient-to-r from-neutral-400 to-white rounded-full liquid-fill-glow transition-all duration-300 ease-out" style="width: 0%"></div>
             </div>
           </div>
@@ -397,19 +422,20 @@
 
       </div>
 
-      <div class="flex flex-wrap items-center justify-between gap-2.5 pt-0.5">
-        <div class="inline-flex liquid-glass p-1 rounded-full border border-white/10 text-xs shadow-inner">
-          <button id="view-both-btn" class="px-4 py-1 rounded-full font-semibold bg-white/20 text-white shadow transition border border-white/15">Both Halves</button>
-          <button id="view-t1-btn" class="px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition">First Half</button>
-          <button id="view-t2-btn" class="px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition">Second Half</button>
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-0.5">
+        <div class="inline-flex liquid-glass p-0.5 sm:p-1 rounded-full border border-white/10 text-[11px] sm:text-xs shadow-inner">
+          <button id="view-both-btn" class="px-2.5 sm:px-4 py-1 rounded-full font-semibold bg-white/20 text-white shadow transition border border-white/15">Both</button>
+          <button id="view-t1-btn" class="px-2.5 sm:px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition">1st Half</button>
+          <button id="view-t2-btn" class="px-2.5 sm:px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition">2nd Half</button>
         </div>
 
-        <div class="flex items-center gap-2 text-xs">
-          <button id="swap-teams-btn" class="liquid-btn px-3.5 py-1.5 rounded-full text-neutral-200 font-medium flex items-center gap-1.5">
+        <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
+          <button id="swap-teams-btn" class="liquid-btn px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-neutral-200 font-medium flex items-center gap-1 sm:gap-1.5">
             <span class="text-neutral-400">⇄</span>
-            <span>Swap Halves</span>
+            <span class="hidden xs:inline">Swap Halves</span>
+            <span class="xs:hidden">Swap</span>
           </button>
-          <button id="reset-all-btn" class="liquid-btn px-3.5 py-1.5 rounded-full text-rose-400 font-medium flex items-center gap-1.5 hover:border-rose-500/40">
+          <button id="reset-all-btn" class="liquid-btn px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-rose-400 font-medium flex items-center gap-1 sm:gap-1.5 hover:border-rose-500/40">
             <span>Clear All</span>
           </button>
         </div>
@@ -543,66 +569,69 @@
     </div>
   </footer>
 
-  <div id="char-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-4 hidden opacity-0 transition-opacity duration-200">
-    <div class="liquid-glass w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-white/15">
+  <div id="char-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-2xl flex items-end sm:items-center justify-center p-0 sm:p-4 hidden opacity-0 transition-opacity duration-200">
+    <div class="liquid-glass w-full max-w-4xl max-h-[92dvh] sm:max-h-[90vh] rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-white/15">
       
+      <!-- Mobile Pull Indicator -->
+      <div class="w-10 h-1 rounded-full bg-white/25 mx-auto mt-2.5 mb-1 sm:hidden"></div>
+
       <!-- Modal Header -->
-      <div class="p-5 border-b border-white/[0.08] flex items-center justify-between gap-4 bg-white/[0.015]">
+      <div class="px-4 py-3 sm:p-5 border-b border-white/[0.08] flex items-center justify-between gap-3 bg-white/[0.015]">
         <div>
-          <h2 class="text-base sm:text-lg font-bold text-white tracking-tight flex items-center gap-2">
+          <h2 class="text-sm sm:text-lg font-bold text-white tracking-tight flex items-center gap-2">
             <span>Select Character</span>
-            <span id="modal-target-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-white/10 text-neutral-200 border border-white/15">First Half, Slot 1</span>
+            <span id="modal-target-badge" class="px-2 py-0.5 sm:px-2.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-white/10 text-neutral-200 border border-white/15">First Half, Slot 1</span>
           </h2>
-          <p class="text-xs text-neutral-400 mt-0.5">Alphabetically organized roster • Filter by Vision, Weapon, Rarity or Name</p>
+          <p class="text-[11px] sm:text-xs text-neutral-400 mt-0.5 hidden xs:block">Alphabetical roster • Filter by Vision, Weapon, Rarity or Name</p>
         </div>
-        <button onclick="closeCharModal()" class="w-8 h-8 rounded-full liquid-btn text-neutral-400 hover:text-white flex items-center justify-center font-bold text-sm">✕</button>
+        <button onclick="closeCharModal()" class="w-8 h-8 rounded-full liquid-btn text-neutral-400 hover:text-white flex items-center justify-center font-bold text-sm flex-shrink-0" aria-label="Close Modal">✕</button>
       </div>
 
-      <!-- Filter Controls -->
-      <div class="p-4 border-b border-white/[0.06] space-y-3 bg-black/30">
+      <!-- Filter Controls with Fluid Horizontal Swiping -->
+      <div class="p-3 sm:p-4 border-b border-white/[0.06] space-y-2.5 bg-black/30">
         <!-- Search bar with clear button -->
         <div class="relative">
-          <input type="text" id="char-search-input" placeholder="Search by character name (e.g., Linnea, Zibai, Baizhu, Clorinde, Nilou)..." class="w-full bg-white/[0.05] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-white/40 transition pl-9 pr-8">
-          <svg class="w-4 h-4 text-neutral-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          <button id="char-search-clear" onclick="clearCharSearch()" class="hidden absolute right-3 top-2.5 text-neutral-400 hover:text-white text-xs font-bold w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">✕</button>
+          <input type="text" id="char-search-input" placeholder="Search character (e.g. Linnea, Zibai, Baizhu)..." class="w-full bg-white/[0.05] border border-white/10 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-white/40 transition pl-8 sm:pl-9 pr-8">
+          <svg class="w-4 h-4 text-neutral-400 absolute left-2.5 sm:left-3 top-2.5 sm:top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <button id="char-search-clear" onclick="clearCharSearch()" class="hidden absolute right-2.5 top-2 text-neutral-400 hover:text-white text-xs font-bold w-5 h-5 rounded-full bg-white/10 flex items-center justify-center" aria-label="Clear Search">✕</button>
         </div>
 
-        <!-- Vision / Element Pills -->
-        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
-          <button onclick="setElementFilter('ALL')" data-filter="ALL" class="elem-filter-btn px-3 py-1 rounded-full font-semibold bg-white/20 text-white border border-white/20 transition shadow-sm">All Visions</button>
-          <button onclick="setElementFilter('Pyro')" data-filter="Pyro" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Pyro</button>
-          <button onclick="setElementFilter('Hydro')" data-filter="Hydro" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Hydro</button>
-          <button onclick="setElementFilter('Anemo')" data-filter="Anemo" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Anemo</button>
-          <button onclick="setElementFilter('Electro')" data-filter="Electro" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Electro</button>
-          <button onclick="setElementFilter('Dendro')" data-filter="Dendro" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Dendro</button>
-          <button onclick="setElementFilter('Cryo')" data-filter="Cryo" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Cryo</button>
-          <button onclick="setElementFilter('Geo')" data-filter="Geo" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Geo</button>
+        <!-- Vision / Element Pills with no-scrollbar fluid horizontal swipe -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs no-scrollbar">
+          <button onclick="setElementFilter('ALL')" data-filter="ALL" class="elem-filter-btn px-3 py-1 rounded-full font-semibold bg-white/20 text-white border border-white/20 transition shadow-sm whitespace-nowrap flex-shrink-0">All Visions</button>
+          <button onclick="setElementFilter('Pyro')" data-filter="Pyro" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">Pyro</button>
+          <button onclick="setElementFilter('Hydro')" data-filter="Hydro" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">Hydro</button>
+          <button onclick="setElementFilter('Anemo')" data-filter="Anemo" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">Anemo</button>
+          <button onclick="setElementFilter('Electro')" data-filter="Electro" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">Electro</button>
+          <button onclick="setElementFilter('Dendro')" data-filter="Dendro" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">Dendro</button>
+          <button onclick="setElementFilter('Cryo')" data-filter="Cryo" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">Cryo</button>
+          <button onclick="setElementFilter('Geo')" data-filter="Geo" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">Geo</button>
         </div>
 
-        <!-- Weapon & Rarity Pills -->
-        <div class="flex flex-wrap items-center justify-between gap-2 text-xs pt-1 border-t border-white/[0.04]">
-          <div class="flex items-center gap-1.5 overflow-x-auto">
-            <span class="text-[11px] text-neutral-400 mr-1 font-medium">Weapon:</span>
-            <button onclick="setWeaponFilter('ALL')" data-filter="ALL" class="weap-filter-btn px-2.5 py-0.5 rounded-md font-semibold bg-white/20 text-white border border-white/20 transition shadow-sm">All</button>
-            <button onclick="setWeaponFilter('Sword')" data-filter="Sword" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">Sword</button>
-            <button onclick="setWeaponFilter('Claymore')" data-filter="Claymore" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">Claymore</button>
-            <button onclick="setWeaponFilter('Polearm')" data-filter="Polearm" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">Polearm</button>
-            <button onclick="setWeaponFilter('Bow')" data-filter="Bow" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">Bow</button>
-            <button onclick="setWeaponFilter('Catalyst')" data-filter="Catalyst" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">Catalyst</button>
+        <!-- Weapon & Rarity Pills with fluid swipe -->
+        <div class="flex flex-col xs:flex-row xs:items-center justify-between gap-2 text-xs pt-1 border-t border-white/[0.04]">
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-0.5 no-scrollbar">
+            <span class="text-[10px] sm:text-[11px] text-neutral-400 mr-0.5 font-medium whitespace-nowrap flex-shrink-0">Weapon:</span>
+            <button onclick="setWeaponFilter('ALL')" data-filter="ALL" class="weap-filter-btn px-2 py-0.5 rounded-md font-semibold bg-white/20 text-white border border-white/20 transition shadow-sm whitespace-nowrap flex-shrink-0">All</button>
+            <button onclick="setWeaponFilter('Sword')" data-filter="Sword" class="weap-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">Sword</button>
+            <button onclick="setWeaponFilter('Claymore')" data-filter="Claymore" class="weap-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">Claymore</button>
+            <button onclick="setWeaponFilter('Polearm')" data-filter="Polearm" class="weap-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">Polearm</button>
+            <button onclick="setWeaponFilter('Bow')" data-filter="Bow" class="weap-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">Bow</button>
+            <button onclick="setWeaponFilter('Catalyst')" data-filter="Catalyst" class="weap-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">Catalyst</button>
           </div>
 
-          <div class="flex items-center gap-1.5">
-            <span class="text-[11px] text-neutral-400 mr-1 font-medium">Class:</span>
-            <button onclick="setRarityFilter('ALL')" data-filter="ALL" class="rarity-filter-btn px-2 py-0.5 rounded-md bg-white/20 text-white font-semibold border border-white/20 transition shadow-sm">All</button>
-            <button onclick="setRarityFilter('5-limited')" data-filter="5-limited" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">5★ Limited</button>
-            <button onclick="setRarityFilter('5-standard')" data-filter="5-standard" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">5★ Standard</button>
-            <button onclick="setRarityFilter('4-star')" data-filter="4-star" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">4★ Units</button>
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-0.5 no-scrollbar">
+            <span class="text-[10px] sm:text-[11px] text-neutral-400 mr-0.5 font-medium whitespace-nowrap flex-shrink-0">Class:</span>
+            <button onclick="setRarityFilter('ALL')" data-filter="ALL" class="rarity-filter-btn px-2 py-0.5 rounded-md bg-white/20 text-white font-semibold border border-white/20 transition shadow-sm whitespace-nowrap flex-shrink-0">All</button>
+            <button onclick="setRarityFilter('5-limited')" data-filter="5-limited" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">5★ Limited</button>
+            <button onclick="setRarityFilter('5-standard')" data-filter="5-standard" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">5★ Standard</button>
+            <button onclick="setRarityFilter('4-star')" data-filter="4-star" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition whitespace-nowrap flex-shrink-0">4★ Units</button>
           </div>
         </div>
       </div>
 
       <!-- Character Grid View -->
-      <div id="modal-char-grid" class="p-4 sm:p-5 overflow-y-auto max-h-[55vh] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+      <div id="modal-char-grid" class="p-3 sm:p-5 overflow-y-auto max-h-[55vh] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
         <!-- Rendered dynamically in alphabetical order -->
       </div>
     </div>
@@ -1025,9 +1054,10 @@
           }
           return `
             <button onclick="updateConstellation(${teamNum}, ${idx}, ${cNum})" 
-                    class="px-2 py-1 rounded-lg text-xs font-mono font-bold transition ${isSelected ? 'bg-white text-black shadow-md' : 'bg-white/[0.06] text-neutral-400 hover:text-white hover:bg-white/10'} ${extraClass}"
+                    class="p-1 sm:px-2 sm:py-1 rounded-lg text-[11px] sm:text-xs font-mono font-bold transition flex flex-col items-center justify-center min-h-[36px] sm:min-h-[40px] ${isSelected ? 'bg-white text-black shadow-md' : 'bg-white/[0.06] text-neutral-400 hover:text-white hover:bg-white/10'} ${extraClass}"
                     title="Constellation ${cNum}${isExempt ? ' (Free via Event/Selector)' : ''}">
-              C${cNum}${isExempt ? `<span class="text-[8px] ${isSelected ? 'text-emerald-800 font-bold' : 'text-emerald-400'} font-sans block leading-none">free</span>` : ''}
+              <span>C${cNum}</span>
+              ${isExempt ? `<span class="text-[7.5px] sm:text-[8px] ${isSelected ? 'text-emerald-800 font-bold' : 'text-emerald-400'} font-sans block leading-none -mt-0.5">free</span>` : ''}
             </button>
           `;
         }).join('');
@@ -1465,9 +1495,9 @@
           : 'border-white/10 hover:border-white/30';
 
         return `
-          <button onclick="selectCharacter('${char.id}')" class="liquid-card p-3 rounded-2xl border ${cardStateClass} text-left transition flex flex-col justify-between group active:scale-[0.98]">
-            <div class="flex items-start gap-2.5">
-              <div class="w-10 h-10 rounded-xl bg-gradient-to-br ${color.bg} border ${color.border} flex items-center justify-center font-bold text-xs ${color.text} flex-shrink-0 group-hover:scale-105 transition shadow-sm">
+          <button onclick="selectCharacter('${char.id}')" class="liquid-card p-2.5 sm:p-3 rounded-2xl border ${cardStateClass} text-left transition flex flex-col justify-between group active:scale-[0.97]">
+            <div class="flex items-start gap-2 sm:gap-2.5">
+              <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br ${color.bg} border ${color.border} flex items-center justify-center font-bold text-xs ${color.text} flex-shrink-0 group-hover:scale-105 transition shadow-sm">
                 <span>${char.name.substring(0, 2)}</span>
               </div>
               <div class="min-w-0 flex-1">
@@ -1476,18 +1506,18 @@
                   <span class="text-[9px] font-bold text-neutral-400 flex-shrink-0">${char.rarity}★</span>
                 </div>
                 <div class="flex items-center gap-1 mt-0.5 flex-wrap">
-                  <span class="text-[9px] font-semibold px-1.5 py-0.2 rounded-full ${color.badge}">
+                  <span class="text-[8.5px] sm:text-[9px] font-semibold px-1 sm:px-1.5 py-0.2 rounded-full ${color.badge}">
                     ${char.vision}
                   </span>
-                  <span class="text-[9px] text-neutral-400 font-medium">
+                  <span class="text-[8.5px] sm:text-[9px] text-neutral-400 font-medium">
                     ${char.weapon}
                   </span>
                 </div>
               </div>
             </div>
 
-            <div class="mt-2.5 pt-2 border-t border-white/[0.06] flex items-center justify-between gap-1 flex-wrap">
-              <span class="text-[10px] font-mono font-medium text-neutral-400">${baseCostText}</span>
+            <div class="mt-2 sm:mt-2.5 pt-1.5 sm:pt-2 border-t border-white/[0.06] flex items-center justify-between gap-1 flex-wrap">
+              <span class="text-[9px] sm:text-[10px] font-mono font-medium text-neutral-400">${baseCostText}</span>
               ${freeTagHtml}
             </div>
           </button>
@@ -1891,21 +1921,21 @@
         if (view === 'both') {
           p1.classList.remove('hidden');
           p2.classList.remove('hidden');
-          bBoth.className = "px-4 py-1 rounded-full font-semibold bg-white/20 text-white shadow transition border border-white/15";
-          b1.className = "px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
-          b2.className = "px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
+          bBoth.className = "px-2.5 sm:px-4 py-1 rounded-full font-semibold bg-white/20 text-white shadow transition border border-white/15";
+          b1.className = "px-2.5 sm:px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
+          b2.className = "px-2.5 sm:px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
         } else if (view === 't1') {
           p1.classList.remove('hidden');
           p2.classList.add('hidden');
-          bBoth.className = "px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
-          b1.className = "px-4 py-1 rounded-full font-semibold bg-white/20 text-white shadow transition border border-white/15";
-          b2.className = "px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
+          bBoth.className = "px-2.5 sm:px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
+          b1.className = "px-2.5 sm:px-4 py-1 rounded-full font-semibold bg-white/20 text-white shadow transition border border-white/15";
+          b2.className = "px-2.5 sm:px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
         } else {
           p1.classList.add('hidden');
           p2.classList.remove('hidden');
-          bBoth.className = "px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
-          b1.className = "px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
-          b2.className = "px-4 py-1 rounded-full font-semibold bg-white/20 text-white shadow transition border border-white/15";
+          bBoth.className = "px-2.5 sm:px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
+          b1.className = "px-2.5 sm:px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
+          b2.className = "px-2.5 sm:px-4 py-1 rounded-full font-semibold bg-white/20 text-white shadow transition border border-white/15";
         }
       }
 
