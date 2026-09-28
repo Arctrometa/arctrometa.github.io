@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Genshin Impact India Abyss Tournament</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: [
+              '-apple-system',
+              'BlinkMacSystemFont',
+              '"Plus Jakarta Sans"',
+              '"SF Pro Display"',
+              '"SF Pro Text"',
+              'system-ui',
+              'sans-serif'
+            ],
+            mono: ['"SF Mono"', '"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            brand: {
+              silver: '#f1f5f9',
+              slate: '#94a3b8',
+              graphite: '#1e293b',
+              red: '#f43f5e',
+              emerald: '#10b981',
+              blue: '#38bdf8'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    body {
+      background-color: #08090b;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Monochrome Fluid Glow Orbs */
+    .liquid-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(140px);
+      opacity: 0.12;
+      pointer-events: none;
+      will-change: transform;
+      animation: floatMonochrome 28s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    }
+    .liquid-orb-1 {
+      top: -100px;
+      left: 10%;
+      width: 580px;
+      height: 580px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(148, 163, 184, 0.05) 55%, transparent 75%);
+    }
+    .liquid-orb-2 {
+      top: 40%;
+      right: -80px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(226, 232, 240, 0.12) 0%, rgba(100, 116, 139, 0.03) 50%, transparent 75%);
+      animation-duration: 34s;
+      animation-delay: -8s;
+    }
+
+    @keyframes floatMonochrome {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(40px, 30px, 0) scale(1.06); }
+      100% { transform: translate3d(-25px, 45px, 0) scale(0.96); }
+    }
+
+    /* Softened Refractive Liquid Glass Paneling */
+    .liquid-glass {
+      position: relative;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.008) 60%, rgba(255, 255, 255, 0.015) 100%),
+                  rgba(13, 15, 18, 0.7);
+      backdrop-filter: blur(32px) saturate(130%);
+      -webkit-backdrop-filter: blur(32px) saturate(130%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 
+        0 16px 36px -8px rgba(0, 0, 0, 0.65),
+        0 1px 2px 0 rgba(0, 0, 0, 0.4),
+        inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.12),
+        inset 0 -1px 1px 0 rgba(0, 0, 0, 0.35);
+      border-radius: 24px;
+    }
+
+    /* Refined Inner Cards with Subdued Specular Bevels */
+    .liquid-card {
+      position: relative;
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.025) 0%, rgba(255, 255, 255, 0.005) 100%),
+                  rgba(16, 18, 22, 0.55);
+      backdrop-filter: blur(20px) saturate(120%);
+      -webkit-backdrop-filter: blur(20px) saturate(120%);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: 
+        0 8px 20px -4px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.09);
+      transition: all 0.22s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .liquid-card:hover {
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%),
+                  rgba(22, 25, 30, 0.7);
+      border-color: rgba(255, 255, 255, 0.13);
+      transform: translateY(-1.5px);
+      box-shadow: 
+        0 12px 26px -6px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.14);
+    }
+
+    /* Tactile Liquid Capsule Buttons */
+    .liquid-btn {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%),
+                  rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 
+        0 3px 8px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.12);
+      transition: all 0.18s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .liquid-btn:hover {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.025) 100%),
+                  rgba(255, 255, 255, 0.035);
+      border-color: rgba(255, 255, 255, 0.16);
+      transform: translateY(-1px);
+    }
+    .liquid-btn:active {
+      transform: scale(0.97) translateY(0);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Primary Apple-Style Titanium Pill */
+    .liquid-btn-primary {
+      background: linear-gradient(180deg, #f8fafc 0%, #cbd5e1 100%);
+      color: #090a0d !important;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 
+        0 5px 14px -2px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -1px 1px 0 rgba(0, 0, 0, 0.15);
+      transition: all 0.18s ease;
+    }
+    .liquid-btn-primary:hover {
+      background: linear-gradient(180deg, #ffffff 0%, #d8e1ea 100%);
+      box-shadow: 
+        0 7px 18px -2px rgba(255, 255, 255, 0.15),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 1);
+      transform: translateY(-1px);
+    }
+
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .liquid-track {
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: inset 0 1.5px 3px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .liquid-fill-glow {
+      box-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.18),
+        inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.4);
+    }
+
+    /* Minimalist Scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    /* High-Contrast Liquid Dropdown Menus */
+    .liquid-select {
+      background-color: #14171d !important;
+      color: #f8fafc !important;
+      border: 1px solid rgba(255, 255, 255, 0.18) !important;
+      border-radius: 12px;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23cbd5e1'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 0.85rem;
+      padding-right: 2.2rem !important;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 1px 0.5px rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .liquid-select:hover {
+      background-color: #1a1e26 !important;
+      border-color: rgba(255, 255, 255, 0.35) !important;
+      color: #ffffff !important;
+    }
+    .liquid-select:focus {
+      background-color: #181c24 !important;
+      border-color: rgba(255, 255, 255, 0.5) !important;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2), 0 6px 14px rgba(0, 0, 0, 0.6);
+    }
+
+    select option,
+    .liquid-select option {
+      background-color: #12141a !important;
+      color: #f8fafc !important;
+      font-weight: 500;
+      padding: 10px 14px;
+    }
+    select option:checked,
+    .liquid-select option:checked {
+      background-color: #272c38 !important;
+      color: #ffffff !important;
+      font-weight: 700;
+    }
+    select option:hover,
+    .liquid-select option:hover {
+      background-color: #2e3544 !important;
+      color: #ffffff !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans text-neutral-100 selection:bg-white/20 selection:text-white relative">
+
+  <!-- Ambient Backdrop Orbs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="liquid-orb liquid-orb-1"></div>
+    <div class="liquid-orb liquid-orb-2"></div>
+  </div>
+
+  <header class="sticky top-0 z-40 border-b border-white/[0.07] bg-[#08090b]/80 backdrop-blur-2xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo & Header -->
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-2xl liquid-glass flex items-center justify-center p-1.5 shadow-sm border border-white/15 flex-shrink-0 group hover:border-white/30 transition">
+          <svg viewBox="0 0 100 100" class="w-6 h-6 drop-shadow-[0_0_8px_rgba(255,255,255,0.35)]" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Primogem 8 Facets -->
+            <polygon points="50,4 50,31 39,39" fill="url(#pg-facet-1)" />
+            <polygon points="50,4 61,39 50,31" fill="url(#pg-facet-2)" />
+            <polygon points="96,50 61,39 69,50" fill="url(#pg-facet-3)" />
+            <polygon points="96,50 69,50 61,61" fill="url(#pg-facet-4)" />
+            <polygon points="50,96 50,69 61,61" fill="url(#pg-facet-5)" />
+            <polygon points="50,96 39,61 50,69" fill="url(#pg-facet-6)" />
+            <polygon points="4,50 31,50 39,61" fill="url(#pg-facet-7)" />
+            <polygon points="4,50 39,39 31,50" fill="url(#pg-facet-8)" />
+            <!-- Center Core Diamond -->
+            <polygon points="50,31 69,50 50,69 31,50" fill="rgba(255, 255, 255, 0.25)" stroke="rgba(255, 255, 255, 0.85)" stroke-width="1.2" />
+            <defs>
+              <linearGradient id="pg-facet-1" x1="50" y1="4" x2="39" y2="39" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#ffffff" />
+                <stop offset="1" stop-color="#cbd5e1" />
+              </linearGradient>
+              <linearGradient id="pg-facet-2" x1="50" y1="4" x2="61" y2="39" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#e2e8f0" />
+                <stop offset="1" stop-color="#94a3b8" />
+              </linearGradient>
+              <linearGradient id="pg-facet-3" x1="96" y1="50" x2="69" y2="50" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#cbd5e1" />
+                <stop offset="1" stop-color="#64748b" />
+              </linearGradient>
+              <linearGradient id="pg-facet-4" x1="96" y1="50" x2="61" y2="61" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#94a3b8" />
+                <stop offset="1" stop-color="#475569" />
+              </linearGradient>
+              <linearGradient id="pg-facet-5" x1="50" y1="96" x2="61" y2="61" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#64748b" />
+                <stop offset="1" stop-color="#334155" />
+              </linearGradient>
+              <linearGradient id="pg-facet-6" x1="50" y1="96" x2="39" y2="61" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#94a3b8" />
+                <stop offset="1" stop-color="#475569" />
+              </linearGradient>
+              <linearGradient id="pg-facet-7" x1="4" y1="50" x2="39" y2="61" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#cbd5e1" />
+                <stop offset="1" stop-color="#64748b" />
+              </linearGradient>
+              <linearGradient id="pg-facet-8" x1="4" y1="50" x2="39" y2="39" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#ffffff" />
+                <stop offset="1" stop-color="#cbd5e1" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h1 class="font-bold text-sm sm:text-base tracking-tight text-white drop-shadow-sm">Genshin Impact India Abyss Tournament</h1>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-medium tracking-wide bg-white/[0.07] text-neutral-300 border border-white/10">5.0 COST CAP</span>
+          </div>
+          <p class="text-[11px] text-neutral-400 font-medium hidden sm:block">Floor 12 First &amp; Second Half Roster Cost Calculator</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 text-xs">
+        <button id="rules-btn" class="liquid-btn px-3.5 py-1.5 rounded-full text-neutral-200 font-medium flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          <span class="hidden sm:inline">Rules &amp; Formulas</span>
+          <span class="sm:hidden">Rules</span>
+        </button>
+
+        <button id="presets-btn" class="liquid-btn px-3.5 py-1.5 rounded-full text-neutral-200 font-medium flex items-center gap-1.5">
+          <span class="text-neutral-400 text-xs">✦</span>
+          <span>Sample Teams</span>
+        </button>
+
+        <button id="copy-match-btn" class="liquid-btn-primary px-4 py-1.5 rounded-full font-semibold flex items-center gap-1.5 active:scale-95 transition-transform">
+          <svg class="w-3.5 h-3.5 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+          <span>Share Lineup</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <section class="border-b border-white/[0.06] bg-black/20 backdrop-blur-2xl py-4 px-4 sm:px-6 relative z-10">
+    <div class="max-w-7xl mx-auto space-y-3.5">
+      
+      <!-- Dual Half Quick Gauges -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+        
+        <!-- First Half Mini Meter -->
+        <div class="liquid-glass p-3.5 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center font-bold text-xs text-neutral-200">
+              1st
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-xs sm:text-sm text-white drop-shadow-sm" id="t1-mini-name">First Half</span>
+                <span id="t1-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/[0.08] text-neutral-300 border border-white/10">LEGAL</span>
+              </div>
+              <p class="text-[11px] text-neutral-400 font-medium" id="t1-summary-sub">0 of 4 Characters Selected</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="font-mono text-sm sm:text-base font-bold tracking-tight text-white tabular-nums" id="t1-mini-cost">0.0 <span class="text-xs font-normal text-neutral-400 font-sans">/ 5.0</span></div>
+            <div class="w-28 sm:w-32 liquid-track h-2 rounded-full overflow-hidden mt-1.5 p-[1px]">
+              <div id="t1-mini-bar" class="h-full bg-gradient-to-r from-neutral-400 to-white rounded-full liquid-fill-glow transition-all duration-300 ease-out" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second Half Mini Meter -->
+        <div class="liquid-glass p-3.5 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center font-bold text-xs text-neutral-200">
+              2nd
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-xs sm:text-sm text-white drop-shadow-sm" id="t2-mini-name">Second Half</span>
+                <span id="t2-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/[0.08] text-neutral-300 border border-white/10">LEGAL</span>
+              </div>
+              <p class="text-[11px] text-neutral-400 font-medium" id="t2-summary-sub">0 of 4 Characters Selected</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="font-mono text-sm sm:text-base font-bold tracking-tight text-white tabular-nums" id="t2-mini-cost">0.0 <span class="text-xs font-normal text-neutral-400 font-sans">/ 5.0</span></div>
+            <div class="w-28 sm:w-32 liquid-track h-2 rounded-full overflow-hidden mt-1.5 p-[1px]">
+              <div id="t2-mini-bar" class="h-full bg-gradient-to-r from-neutral-400 to-white rounded-full liquid-fill-glow transition-all duration-300 ease-out" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2.5 pt-0.5">
+        <div class="inline-flex liquid-glass p-1 rounded-full border border-white/10 text-xs shadow-inner">
+          <button id="view-both-btn" class="px-4 py-1 rounded-full font-semibold bg-white/20 text-white shadow transition border border-white/15">Both Halves</button>
+          <button id="view-t1-btn" class="px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition">First Half</button>
+          <button id="view-t2-btn" class="px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition">Second Half</button>
+        </div>
+
+        <div class="flex items-center gap-2 text-xs">
+          <button id="swap-teams-btn" class="liquid-btn px-3.5 py-1.5 rounded-full text-neutral-200 font-medium flex items-center gap-1.5">
+            <span class="text-neutral-400">⇄</span>
+            <span>Swap Halves</span>
+          </button>
+          <button id="reset-all-btn" class="liquid-btn px-3.5 py-1.5 rounded-full text-rose-400 font-medium flex items-center gap-1.5 hover:border-rose-500/40">
+            <span>Clear All</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full relative z-10">
+    <div id="teams-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+      
+      <!-- FIRST HALF PANEL -->
+      <section id="team1-panel" class="space-y-4">
+        <div class="liquid-glass p-5 sm:p-6 overflow-hidden">
+          <div class="flex items-start justify-between gap-3 relative z-10">
+            <div>
+              <div class="flex items-center gap-2">
+                <input type="text" id="t1-name-input" value="First Half" class="bg-transparent text-lg sm:text-xl font-bold tracking-tight text-white focus:outline-none border-b border-transparent focus:border-white/40 hover:border-white/20 px-1 py-0.5 rounded transition">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/[0.08] text-neutral-300 border border-white/10">CHAMBERS 1–3</span>
+              </div>
+              <p class="text-xs text-neutral-400 mt-1 font-medium">Tournament Ceiling: 5.0 Limited Cost Total</p>
+            </div>
+
+            <!-- Cost Display -->
+            <div class="text-right">
+              <div class="text-3xl font-mono font-bold tracking-tight text-white tabular-nums drop-shadow-sm" id="t1-cost-display">0.0 <span class="text-sm font-normal text-neutral-400 font-sans">/ 5.0</span></div>
+              <span id="t1-status-pill" class="inline-block text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-white/[0.08] text-neutral-300 border border-white/10">LEGAL ROSTER</span>
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="mt-5">
+            <div class="flex justify-between text-[11px] font-mono font-semibold text-neutral-400 mb-1.5">
+              <span>0.0</span>
+              <span class="text-neutral-300">5.0 Cap</span>
+            </div>
+            <div class="w-full liquid-track h-2.5 rounded-full overflow-hidden p-[1px]">
+              <div id="t1-progress-fill" class="h-full rounded-full bg-gradient-to-r from-neutral-400 via-neutral-200 to-white liquid-fill-glow transition-all duration-300 ease-out" style="width: 0%;"></div>
+            </div>
+            <div id="t1-budget-alert" class="hidden mt-2.5 text-xs font-semibold text-rose-400 flex items-center gap-1.5">
+              <span>⚠️</span>
+              <span id="t1-budget-alert-text">Over budget! Exceeds 5.0 limit.</span>
+            </div>
+          </div>
+
+          <!-- Actions & Breakdown Toggle -->
+          <div class="mt-5 pt-3.5 border-t border-white/[0.06] flex items-center justify-between text-xs">
+            <button onclick="toggleCostBreakdown(1)" class="text-neutral-400 hover:text-white transition flex items-center gap-1.5 font-medium">
+              <span class="text-neutral-300 text-xs">▼</span>
+              <span id="t1-breakdown-btn-text">Show Math Breakdown</span>
+            </button>
+            <div class="flex items-center gap-2">
+              <button onclick="copySingleTeam(1)" class="liquid-btn px-3 py-1 rounded-full text-neutral-300 font-medium text-[11px]">Copy Half</button>
+              <button onclick="clearTeam(1)" class="liquid-btn px-2.5 py-1 rounded-full text-neutral-400 hover:text-rose-400 font-medium text-[11px]">Clear</button>
+            </div>
+          </div>
+
+          <!-- Itemized Breakdown Card -->
+          <div id="t1-breakdown-card" class="hidden mt-3 p-3.5 bg-black/40 rounded-2xl border border-white/[0.07] text-xs text-neutral-300 space-y-1.5 font-mono backdrop-blur-md"></div>
+        </div>
+
+        <!-- Team 1: 4 Character Slots -->
+        <div id="t1-slots" class="space-y-3"></div>
+      </section>
+
+      <!-- SECOND HALF PANEL -->
+      <section id="team2-panel" class="space-y-4">
+        <div class="liquid-glass p-5 sm:p-6 overflow-hidden">
+          <div class="flex items-start justify-between gap-3 relative z-10">
+            <div>
+              <div class="flex items-center gap-2">
+                <input type="text" id="t2-name-input" value="Second Half" class="bg-transparent text-lg sm:text-xl font-bold tracking-tight text-white focus:outline-none border-b border-transparent focus:border-white/40 hover:border-white/20 px-1 py-0.5 rounded transition">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/[0.08] text-neutral-300 border border-white/10">CHAMBERS 1–3</span>
+              </div>
+              <p class="text-xs text-neutral-400 mt-1 font-medium">Tournament Ceiling: 5.0 Limited Cost Total</p>
+            </div>
+
+            <!-- Cost Display -->
+            <div class="text-right">
+              <div class="text-3xl font-mono font-bold tracking-tight text-white tabular-nums drop-shadow-sm" id="t2-cost-display">0.0 <span class="text-sm font-normal text-neutral-400 font-sans">/ 5.0</span></div>
+              <span id="t2-status-pill" class="inline-block text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-white/[0.08] text-neutral-300 border border-white/10">LEGAL ROSTER</span>
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="mt-5">
+            <div class="flex justify-between text-[11px] font-mono font-semibold text-neutral-400 mb-1.5">
+              <span>0.0</span>
+              <span class="text-neutral-300">5.0 Cap</span>
+            </div>
+            <div class="w-full liquid-track h-2.5 rounded-full overflow-hidden p-[1px]">
+              <div id="t2-progress-fill" class="h-full rounded-full bg-gradient-to-r from-neutral-400 via-neutral-200 to-white liquid-fill-glow transition-all duration-300 ease-out" style="width: 0%;"></div>
+            </div>
+            <div id="t2-budget-alert" class="hidden mt-2.5 text-xs font-semibold text-rose-400 flex items-center gap-1.5">
+              <span>⚠️</span>
+              <span id="t2-budget-alert-text">Over budget! Exceeds 5.0 limit.</span>
+            </div>
+          </div>
+
+          <!-- Actions & Breakdown Toggle -->
+          <div class="mt-5 pt-3.5 border-t border-white/[0.06] flex items-center justify-between text-xs">
+            <button onclick="toggleCostBreakdown(2)" class="text-neutral-400 hover:text-white transition flex items-center gap-1.5 font-medium">
+              <span class="text-neutral-300 text-xs">▼</span>
+              <span id="t2-breakdown-btn-text">Show Math Breakdown</span>
+            </button>
+            <div class="flex items-center gap-2">
+              <button onclick="copySingleTeam(2)" class="liquid-btn px-3 py-1 rounded-full text-neutral-300 font-medium text-[11px]">Copy Half</button>
+              <button onclick="clearTeam(2)" class="liquid-btn px-2.5 py-1 rounded-full text-neutral-400 hover:text-rose-400 font-medium text-[11px]">Clear</button>
+            </div>
+          </div>
+
+          <!-- Itemized Breakdown Card -->
+          <div id="t2-breakdown-card" class="hidden mt-3 p-3.5 bg-black/40 rounded-2xl border border-white/[0.07] text-xs text-neutral-300 space-y-1.5 font-mono backdrop-blur-md"></div>
+        </div>
+
+        <!-- Team 2: 4 Character Slots -->
+        <div id="t2-slots" class="space-y-3"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 pt-4 text-center relative z-10">
+    <div class="liquid-glass py-4 px-6 rounded-2xl border border-white/[0.06] text-neutral-400 text-[11px] leading-relaxed max-w-3xl mx-auto space-y-1 backdrop-blur-md">
+      <p class="text-neutral-300">
+        This website is made with AI and if any issues arise or the calculator is inaccurate, please contact <span class="text-white font-mono font-semibold bg-white/[0.08] px-1.5 py-0.5 rounded-md border border-white/10">@arctrometa</span> on Discord.
+      </p>
+      <p class="text-neutral-500 text-[10px]">
+        This website is not affiliated with HoYoverse and the website is made for the Genshin Impact India Discord server.
+      </p>
+    </div>
+  </footer>
+
+  <div id="char-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-4 hidden opacity-0 transition-opacity duration-200">
+    <div class="liquid-glass w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-white/15">
+      
+      <!-- Modal Header -->
+      <div class="p-5 border-b border-white/[0.08] flex items-center justify-between gap-4 bg-white/[0.015]">
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-white tracking-tight flex items-center gap-2">
+            <span>Select Character</span>
+            <span id="modal-target-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-white/10 text-neutral-200 border border-white/15">First Half, Slot 1</span>
+          </h2>
+          <p class="text-xs text-neutral-400 mt-0.5">Alphabetically organized roster • Filter by Vision, Weapon, Rarity or Name</p>
+        </div>
+        <button onclick="closeCharModal()" class="w-8 h-8 rounded-full liquid-btn text-neutral-400 hover:text-white flex items-center justify-center font-bold text-sm">✕</button>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="p-4 border-b border-white/[0.06] space-y-3 bg-black/30">
+        <!-- Search bar -->
+        <div class="relative">
+          <input type="text" id="char-search-input" placeholder="Search by character name (e.g., Baizhu, Clorinde, Tartaglia, Varesa, Nilou)..." class="w-full bg-white/[0.05] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-white/40 transition pl-9">
+          <svg class="w-4 h-4 text-neutral-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+
+        <!-- Vision / Element Pills -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+          <button onclick="setElementFilter('ALL')" class="elem-filter-btn px-3 py-1 rounded-full font-semibold bg-white/20 text-white border border-white/20 transition">All Visions</button>
+          <button onclick="setElementFilter('Pyro')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Pyro</button>
+          <button onclick="setElementFilter('Hydro')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Hydro</button>
+          <button onclick="setElementFilter('Anemo')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Anemo</button>
+          <button onclick="setElementFilter('Electro')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Electro</button>
+          <button onclick="setElementFilter('Dendro')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Dendro</button>
+          <button onclick="setElementFilter('Cryo')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Cryo</button>
+          <button onclick="setElementFilter('Geo')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Geo</button>
+        </div>
+
+        <!-- Weapon & Rarity Pills -->
+        <div class="flex flex-wrap items-center justify-between gap-2 text-xs pt-1 border-t border-white/[0.04]">
+          <div class="flex items-center gap-1.5 overflow-x-auto">
+            <span class="text-[11px] text-neutral-400 mr-1 font-medium">Weapon:</span>
+            <button onclick="setWeaponFilter('ALL')" class="weap-filter-btn px-2.5 py-0.5 rounded-md font-semibold bg-white/15 text-white transition">All</button>
+            <button onclick="setWeaponFilter('Sword')" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white transition">Sword</button>
+            <button onclick="setWeaponFilter('Claymore')" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white transition">Claymore</button>
+            <button onclick="setWeaponFilter('Polearm')" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white transition">Polearm</button>
+            <button onclick="setWeaponFilter('Bow')" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white transition">Bow</button>
+            <button onclick="setWeaponFilter('Catalyst')" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white transition">Catalyst</button>
+          </div>
+
+          <div class="flex items-center gap-1.5">
+            <span class="text-[11px] text-neutral-400 mr-1 font-medium">Class:</span>
+            <button onclick="setRarityFilter('ALL')" class="rarity-filter-btn px-2 py-0.5 rounded-md bg-white/15 text-white font-semibold transition">All</button>
+            <button onclick="setRarityFilter('5-limited')" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-300 hover:text-white transition">5★ Limited</button>
+            <button onclick="setRarityFilter('5-standard')" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-300 hover:text-white transition">5★ Standard</button>
+            <button onclick="setRarityFilter('4-star')" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-300 hover:text-white transition">4★ Units</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Character Grid View -->
+      <div id="modal-char-grid" class="p-4 sm:p-5 overflow-y-auto max-h-[55vh] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+        <!-- Rendered dynamically in alphabetical order -->
+      </div>
+    </div>
+  </div>
+
+  <div id="rules-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-4 hidden opacity-0 transition-opacity duration-200">
+    <div class="liquid-glass w-full max-w-2xl max-h-[85vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-white/15">
+      <div class="p-5 border-b border-white/[0.08] flex items-center justify-between bg-white/[0.02]">
+        <div class="flex items-center gap-2.5">
+          <span class="text-lg">📜</span>
+          <h2 class="text-base font-bold text-white tracking-tight">Genshin Impact India Abyss Tournament Rules</h2>
+        </div>
+        <button onclick="closeRulesModal()" class="w-8 h-8 rounded-full liquid-btn text-neutral-400 hover:text-white flex items-center justify-center font-bold text-sm">✕</button>
+      </div>
+
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-4 text-xs text-neutral-300 leading-relaxed font-sans">
+        
+        <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] space-y-2">
+          <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+            <span>Match Structure &amp; Format</span>
+          </h3>
+          <p>Double Elimination, 1v1 competitive speedrun matches. Both players run the exact same Spiral Abyss Floor 12 Chambers. The player with the fastest clear time wins the match.</p>
+          <div class="text-[11px] pt-1">
+            <div class="bg-black/30 p-2.5 rounded-xl border border-white/5">
+              <span class="text-white font-semibold">Resets:</span> Unlimited resets are permitted, but all restarts add directly to total wall-clock run time. Opponents do not wait.
+            </div>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] space-y-2">
+          <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+            <span>The 5.0 Limited Cost Ceiling</span>
+          </h3>
+          <p>Each individual half (First Half and Second Half) has a strict maximum limit of <strong class="text-white">5.0 Limited Cost</strong>.</p>
+          
+          <ul class="space-y-1.5 list-disc pl-4 text-neutral-300">
+            <li><strong class="text-white">4★ Characters &amp; Weapons:</strong> <strong>0.0 Cost</strong> regardless of constellation or refinement level.</li>
+            <li><strong class="text-white">5★ Limited Characters:</strong> <strong>1.0 Cost base</strong> (C0 = 1.0). Each subsequent constellation adds <strong>+1.0 Cost</strong> (unless discounted by event exemptions).</li>
+            <li><strong class="text-white">5★ Standard Characters:</strong> <strong>0.0 Cost base</strong> (C0 = 0.0). Each subsequent constellation adds <strong>+0.5 Cost</strong> (unless discounted by selectors/events).</li>
+            <li><strong class="text-white">5★ Limited Weapons:</strong> <strong>1.0 Cost base</strong> (R1 = 1.0). Each refinement adds <strong>+1.0 Cost</strong>.</li>
+            <li><strong class="text-white">5★ Standard Weapons:</strong> <strong>0.0 Cost base</strong> (R1 = 0.0). Each refinement adds <strong>+0.5 Cost</strong> (R2 = 0.5, R3 = 1.0, etc.).</li>
+          </ul>
+        </div>
+
+        <!-- Event & Selector Exemptions Section -->
+        <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] space-y-2.5">
+          <h3 class="text-sm font-bold text-neutral-200 flex items-center gap-1.5">
+            <span>Event &amp; Selector Constellation Exemptions</span>
+          </h3>
+          <p>Constellations accessible for free via the Anniversary Selectors and "To Temper Thyself and Journey Far" event feature universal discounts across all participant accounts:</p>
+          
+          <ul class="space-y-2 list-disc pl-4 text-neutral-300">
+            <li>
+              <strong class="text-emerald-300">Dual-Event Limited Pool (5 Characters): Baizhu, Chiori, Clorinde, Nilou, Tartaglia</strong>
+              <br>Because these 5 characters are obtainable for free through <strong class="text-white">both</strong> the Anniversary Selector and the Temper Thyself event, <strong class="text-emerald-300">both their C1 and C2 constellations are 0.0 Cost</strong>!
+              <br><span class="text-[11px] text-neutral-400">Progression: C0 = 1.0 | C1 = 1.0 | C2 = 1.0 | C3 = 2.0 | C4 = 3.0 | C5 = 4.0 | C6 = 5.0.</span>
+            </li>
+            <li>
+              <strong class="text-emerald-300">Anniversary Selector Limited (1 Character): Varesa</strong>
+              <br>Available via the Anniversary Selector. Her <strong class="text-white">C1 constellation is 0.0 Cost</strong> (C1R0 Varesa = 1.0 Cost total).
+            </li>
+            <li>
+              <strong class="text-white">Yearly Standard Selector (8 Characters): Dehya, Diluc, Jean, Keqing, Mona, Qiqi, Tighnari, Yumemizuki Mizuki</strong>
+              <br>Present in both the Yearly Standard Selector and Temper Thyself. <strong class="text-emerald-300">Both C1 and C2 are 0.0 Cost</strong>!
+              <br><span class="text-[11px] text-neutral-400">Progression: C0 = 0.0 | C1 = 0.0 | C2 = 0.0 | C3 = 0.5 | C4 = 1.0 | C5 = 1.5 | C6 = 2.0.</span>
+            </li>
+            <li>
+              <strong class="text-white">Temper Thyself Only Limited Pool (20 Characters):</strong>
+              <br>Lyney, Wriothesley, Navia, Xianyun, Sigewinne, Emilie, Albedo, Ayaka, Ayato, Cyno, Eula, Ganyu, Hu Tao, Itto, Klee, Kokomi, Shenhe, Wanderer, Xiao, Yae Miko, Yoimiya.
+              <br><strong class="text-emerald-300">C1 constellation is 0.0 Cost</strong> (C1R0 = 1.0 Cost total).
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="presets-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-4 hidden opacity-0 transition-opacity duration-200">
+    <div class="liquid-glass w-full max-w-2xl max-h-[85vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-white/15">
+      <div class="p-5 border-b border-white/[0.08] flex items-center justify-between bg-white/[0.02]">
+        <div class="flex items-center gap-2">
+          <span class="text-neutral-300 text-lg">✦</span>
+          <h2 class="text-base font-bold text-white tracking-tight">Approved Tournament Sample Lineups</h2>
+        </div>
+        <button onclick="closePresetsModal()" class="w-8 h-8 rounded-full liquid-btn text-neutral-400 hover:text-white flex items-center justify-center font-bold text-sm">✕</button>
+      </div>
+
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-3.5 text-xs text-neutral-300">
+        <p class="text-neutral-400">Load verified competitive archetypes meeting the strict 5.0 cost limit directly into either half:</p>
+        <div id="presets-container" class="space-y-3">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 liquid-glass px-4 py-3 rounded-2xl text-xs font-semibold text-white shadow-2xl flex items-center gap-2.5 transition-all duration-300 translate-y-12 opacity-0 pointer-events-none border border-white/15">
+    <span id="toast-icon" class="text-neutral-300 text-sm">✓</span>
+    <span id="toast-msg">Notification text</span>
+  </div>
+
+  <script>
+    const VISION_COLORS = {
+      Pyro: { bg: 'from-red-500/15 to-orange-500/5', border: 'border-red-500/25', text: 'text-red-300', badge: 'bg-red-500/10 text-red-300 border border-red-500/20' },
+      Hydro: { bg: 'from-sky-500/15 to-blue-500/5', border: 'border-sky-500/25', text: 'text-sky-300', badge: 'bg-sky-500/10 text-sky-300 border border-sky-500/20' },
+      Anemo: { bg: 'from-teal-500/15 to-emerald-500/5', border: 'border-teal-500/25', text: 'text-teal-300', badge: 'bg-teal-500/10 text-teal-300 border border-teal-500/20' },
+      Electro: { bg: 'from-purple-500/15 to-indigo-500/5', border: 'border-purple-500/25', text: 'text-purple-300', badge: 'bg-purple-500/10 text-purple-300 border border-purple-500/20' },
+      Dendro: { bg: 'from-lime-500/15 to-emerald-500/5', border: 'border-lime-500/25', text: 'text-lime-300', badge: 'bg-lime-500/10 text-lime-300 border border-lime-500/20' },
+      Cryo: { bg: 'from-cyan-500/15 to-blue-500/5', border: 'border-cyan-500/25', text: 'text-cyan-200', badge: 'bg-cyan-500/10 text-cyan-200 border border-cyan-500/20' },
+      Geo: { bg: 'from-amber-500/15 to-yellow-500/5', border: 'border-amber-500/25', text: 'text-amber-300', badge: 'bg-amber-500/10 text-amber-300 border border-amber-500/20' }
+    };
+
+    /*
+     * Exhaustive character roster alphabetically sorted by name.
+     * 
+     * Anniversary Selector Limited Pool: Baizhu, Chiori, Clorinde, Nilou, Tartaglia, Varesa.
+     * - Baizhu, Chiori, Clorinde, Nilou, Tartaglia are also in Temper Thyself -> exemptCons: [1, 2] (both C1 & C2 free).
+     * - Varesa is only in Anniversary Selector -> exemptCons: [1] (C1 free).
+     * 
+     * Yearly Selector Standard Pool: Dehya, Diluc, Jean, Keqing, Mona, Qiqi, Tighnari, Yumemizuki Mizuki -> exemptCons: [1, 2].
+     */
+    const CHARACTERS_DB = [
+      { id: 'aino', name: 'Aino', rarity: 4, vision: 'Hydro', weapon: 'Claymore', isStandard: false },
+      { id: 'albedo', name: 'Albedo', rarity: 5, vision: 'Geo', weapon: 'Sword', isStandard: false, exemptCons: [1] },
+      { id: 'alhaitham', name: 'Alhaitham', rarity: 5, vision: 'Dendro', weapon: 'Sword', isStandard: false },
+      { id: 'aloy', name: 'Aloy', rarity: 5, vision: 'Cryo', weapon: 'Bow', isStandard: true },
+      { id: 'alyosha', name: 'Alyosha', rarity: 4, vision: 'Electro', weapon: 'Polearm', isStandard: false },
+      { id: 'amber', name: 'Amber', rarity: 4, vision: 'Pyro', weapon: 'Bow', isStandard: false },
+      { id: 'itto', name: 'Arataki Itto', rarity: 5, vision: 'Geo', weapon: 'Claymore', isStandard: false, exemptCons: [1] },
+      { id: 'arlecchino', name: 'Arlecchino', rarity: 5, vision: 'Pyro', weapon: 'Polearm', isStandard: false },
+      { id: 'baizhu', name: 'Baizhu', rarity: 5, vision: 'Dendro', weapon: 'Catalyst', isStandard: false, isAnniSelector: true, exemptCons: [1, 2] },
+      { id: 'barbara', name: 'Barbara', rarity: 4, vision: 'Hydro', weapon: 'Catalyst', isStandard: false },
+      { id: 'beidou', name: 'Beidou', rarity: 4, vision: 'Electro', weapon: 'Claymore', isStandard: false },
+      { id: 'bennett', name: 'Bennett', rarity: 4, vision: 'Pyro', weapon: 'Sword', isStandard: false },
+      { id: 'candace', name: 'Candace', rarity: 4, vision: 'Hydro', weapon: 'Polearm', isStandard: false },
+      { id: 'charlotte', name: 'Charlotte', rarity: 4, vision: 'Cryo', weapon: 'Catalyst', isStandard: false },
+      { id: 'chasca', name: 'Chasca', rarity: 5, vision: 'Anemo', weapon: 'Bow', isStandard: false },
+      { id: 'chevreuse', name: 'Chevreuse', rarity: 4, vision: 'Pyro', weapon: 'Polearm', isStandard: false },
+      { id: 'chiori', name: 'Chiori', rarity: 5, vision: 'Geo', weapon: 'Sword', isStandard: false, isAnniSelector: true, exemptCons: [1, 2] },
+      { id: 'chongyun', name: 'Chongyun', rarity: 4, vision: 'Cryo', weapon: 'Claymore', isStandard: false },
+      { id: 'citlali', name: 'Citlali', rarity: 5, vision: 'Cryo', weapon: 'Catalyst', isStandard: false },
+      { id: 'clorinde', name: 'Clorinde', rarity: 5, vision: 'Electro', weapon: 'Sword', isStandard: false, isAnniSelector: true, exemptCons: [1, 2] },
+      { id: 'collei', name: 'Collei', rarity: 4, vision: 'Dendro', weapon: 'Bow', isStandard: false },
+      { id: 'columbina', name: 'Columbina', rarity: 5, vision: 'Hydro', weapon: 'Catalyst', isStandard: false },
+      { id: 'cyno', name: 'Cyno', rarity: 5, vision: 'Electro', weapon: 'Polearm', isStandard: false, exemptCons: [1] },
+      { id: 'dahlia', name: 'Dahlia', rarity: 4, vision: 'Hydro', weapon: 'Sword', isStandard: false },
+      { id: 'dehya', name: 'Dehya', rarity: 5, vision: 'Pyro', weapon: 'Claymore', isStandard: true, isYearlySelector: true, exemptCons: [1, 2] },
+      { id: 'diluc', name: 'Diluc', rarity: 5, vision: 'Pyro', weapon: 'Claymore', isStandard: true, isYearlySelector: true, exemptCons: [1, 2] },
+      { id: 'diona', name: 'Diona', rarity: 4, vision: 'Cryo', weapon: 'Bow', isStandard: false },
+      { id: 'dori', name: 'Dori', rarity: 4, vision: 'Electro', weapon: 'Claymore', isStandard: false },
+      { id: 'durin', name: 'Durin', rarity: 5, vision: 'Pyro', weapon: 'Sword', isStandard: false },
+      { id: 'emilie', name: 'Emilie', rarity: 5, vision: 'Dendro', weapon: 'Polearm', isStandard: false, exemptCons: [1] },
+      { id: 'escoffier', name: 'Escoffier', rarity: 5, vision: 'Cryo', weapon: 'Polearm', isStandard: false },
+      { id: 'eula', name: 'Eula', rarity: 5, vision: 'Cryo', weapon: 'Claymore', isStandard: false, exemptCons: [1] },
+      { id: 'faruzan', name: 'Faruzan', rarity: 4, vision: 'Anemo', weapon: 'Bow', isStandard: false },
+      { id: 'fischl', name: 'Fischl', rarity: 4, vision: 'Electro', weapon: 'Bow', isStandard: false },
+      { id: 'flins', name: 'Flins', rarity: 5, vision: 'Electro', weapon: 'Polearm', isStandard: false },
+      { id: 'freminet', name: 'Freminet', rarity: 4, vision: 'Cryo', weapon: 'Claymore', isStandard: false },
+      { id: 'furina', name: 'Furina', rarity: 5, vision: 'Hydro', weapon: 'Sword', isStandard: false },
+      { id: 'gaming', name: 'Gaming', rarity: 4, vision: 'Pyro', weapon: 'Claymore', isStandard: false },
+      { id: 'ganyu', name: 'Ganyu', rarity: 5, vision: 'Cryo', weapon: 'Bow', isStandard: false, exemptCons: [1] },
+      { id: 'gorou', name: 'Gorou', rarity: 4, vision: 'Geo', weapon: 'Bow', isStandard: false },
+      { id: 'hu_tao', name: 'Hu Tao', rarity: 5, vision: 'Pyro', weapon: 'Polearm', isStandard: false, exemptCons: [1] },
+      { id: 'ifa', name: 'Ifa', rarity: 4, vision: 'Anemo', weapon: 'Catalyst', isStandard: false },
+      { id: 'illuga', name: 'Illuga', rarity: 4, vision: 'Geo', weapon: 'Polearm', isStandard: false },
+      { id: 'ineffa', name: 'Ineffa', rarity: 5, vision: 'Electro', weapon: 'Polearm', isStandard: false },
+      { id: 'jahoda', name: 'Jahoda', rarity: 4, vision: 'Anemo', weapon: 'Bow', isStandard: false },
+      { id: 'jean', name: 'Jean', rarity: 5, vision: 'Anemo', weapon: 'Sword', isStandard: true, isYearlySelector: true, exemptCons: [1, 2] },
+      { id: 'kachina', name: 'Kachina', rarity: 4, vision: 'Geo', weapon: 'Polearm', isStandard: false },
+      { id: 'kazuha', name: 'Kaedehara Kazuha', rarity: 5, vision: 'Anemo', weapon: 'Sword', isStandard: false },
+      { id: 'kaeya', name: 'Kaeya', rarity: 4, vision: 'Cryo', weapon: 'Sword', isStandard: false },
+      { id: 'ayaka', name: 'Kamisato Ayaka', rarity: 5, vision: 'Cryo', weapon: 'Sword', isStandard: false, exemptCons: [1] },
+      { id: 'ayato', name: 'Kamisato Ayato', rarity: 5, vision: 'Hydro', weapon: 'Sword', isStandard: false, exemptCons: [1] },
+      { id: 'kaveh', name: 'Kaveh', rarity: 4, vision: 'Dendro', weapon: 'Claymore', isStandard: false },
+      { id: 'keqing', name: 'Keqing', rarity: 5, vision: 'Electro', weapon: 'Sword', isStandard: true, isYearlySelector: true, exemptCons: [1, 2] },
+      { id: 'kinich', name: 'Kinich', rarity: 5, vision: 'Dendro', weapon: 'Claymore', isStandard: false },
+      { id: 'kirara', name: 'Kirara', rarity: 4, vision: 'Dendro', weapon: 'Sword', isStandard: false },
+      { id: 'klee', name: 'Klee', rarity: 5, vision: 'Pyro', weapon: 'Catalyst', isStandard: false, exemptCons: [1] },
+      { id: 'kujou_sara', name: 'Kujou Sara', rarity: 4, vision: 'Electro', weapon: 'Bow', isStandard: false },
+      { id: 'kuki_shinobu', name: 'Kuki Shinobu', rarity: 4, vision: 'Electro', weapon: 'Sword', isStandard: false },
+      { id: 'lanyan', name: 'Lan Yan', rarity: 4, vision: 'Anemo', weapon: 'Catalyst', isStandard: false },
+      { id: 'lauma', name: 'Lauma', rarity: 5, vision: 'Dendro', weapon: 'Catalyst', isStandard: false },
+      { id: 'layla', name: 'Layla', rarity: 4, vision: 'Cryo', weapon: 'Sword', isStandard: false },
+      { id: 'linnea', name: 'Linnea', rarity: 5, vision: 'Geo', weapon: 'Bow', isStandard: false },
+      { id: 'lisa', name: 'Lisa', rarity: 4, vision: 'Electro', weapon: 'Catalyst', isStandard: false },
+      { id: 'lohen', name: 'Lohen', rarity: 5, vision: 'Cryo', weapon: 'Polearm', isStandard: false },
+      { id: 'lynette', name: 'Lynette', rarity: 4, vision: 'Anemo', weapon: 'Sword', isStandard: false },
+      { id: 'lyney', name: 'Lyney', rarity: 5, vision: 'Pyro', weapon: 'Bow', isStandard: false, exemptCons: [1] },
+      { id: 'mavuika', name: 'Mavuika', rarity: 5, vision: 'Pyro', weapon: 'Claymore', isStandard: false },
+      { id: 'mika', name: 'Mika', rarity: 4, vision: 'Cryo', weapon: 'Polearm', isStandard: false },
+      { id: 'mona', name: 'Mona', rarity: 5, vision: 'Hydro', weapon: 'Catalyst', isStandard: true, isYearlySelector: true, exemptCons: [1, 2] },
+      { id: 'mualani', name: 'Mualani', rarity: 5, vision: 'Hydro', weapon: 'Catalyst', isStandard: false },
+      { id: 'nahida', name: 'Nahida', rarity: 5, vision: 'Dendro', weapon: 'Catalyst', isStandard: false },
+      { id: 'navia', name: 'Navia', rarity: 5, vision: 'Geo', weapon: 'Claymore', isStandard: false, exemptCons: [1] },
+      { id: 'nefer', name: 'Nefer', rarity: 5, vision: 'Dendro', weapon: 'Catalyst', isStandard: false },
+      { id: 'neuvillette', name: 'Neuvillette', rarity: 5, vision: 'Hydro', weapon: 'Catalyst', isStandard: false },
+      { id: 'nicole', name: 'Nicole', rarity: 5, vision: 'Pyro', weapon: 'Catalyst', isStandard: false },
+      { id: 'nilou', name: 'Nilou', rarity: 5, vision: 'Hydro', weapon: 'Sword', isStandard: false, isAnniSelector: true, exemptCons: [1, 2] },
+      { id: 'ningguang', name: 'Ningguang', rarity: 4, vision: 'Geo', weapon: 'Catalyst', isStandard: false },
+      { id: 'noelle', name: 'Noelle', rarity: 4, vision: 'Geo', weapon: 'Claymore', isStandard: false },
+      { id: 'odette', name: 'Odette', rarity: 5, vision: 'Cryo', weapon: 'Sword', isStandard: false },
+      { id: 'ororon', name: 'Ororon', rarity: 4, vision: 'Electro', weapon: 'Bow', isStandard: false },
+      { id: 'prune', name: 'Prune', rarity: 4, vision: 'Anemo', weapon: 'Catalyst', isStandard: false },
+      { id: 'qiqi', name: 'Qiqi', rarity: 5, vision: 'Cryo', weapon: 'Sword', isStandard: true, isYearlySelector: true, exemptCons: [1, 2] },
+      { id: 'raiden', name: 'Raiden Shogun', rarity: 5, vision: 'Electro', weapon: 'Polearm', isStandard: false },
+      { id: 'razor', name: 'Razor', rarity: 4, vision: 'Electro', weapon: 'Claymore', isStandard: false },
+      { id: 'rosaria', name: 'Rosaria', rarity: 4, vision: 'Cryo', weapon: 'Polearm', isStandard: false },
+      { id: 'sandrone', name: 'Sandrone', rarity: 5, vision: 'Cryo', weapon: 'Claymore', isStandard: false },
+      { id: 'kokomi', name: 'Sangonomiya Kokomi', rarity: 5, vision: 'Hydro', weapon: 'Catalyst', isStandard: false, exemptCons: [1] },
+      { id: 'sayu', name: 'Sayu', rarity: 4, vision: 'Anemo', weapon: 'Claymore', isStandard: false },
+      { id: 'sethos', name: 'Sethos', rarity: 4, vision: 'Electro', weapon: 'Bow', isStandard: false },
+      { id: 'shenhe', name: 'Shenhe', rarity: 5, vision: 'Cryo', weapon: 'Polearm', isStandard: false, exemptCons: [1] },
+      { id: 'shikanoin_heizou', name: 'Shikanoin Heizou', rarity: 4, vision: 'Anemo', weapon: 'Catalyst', isStandard: false },
+      { id: 'sigewinne', name: 'Sigewinne', rarity: 5, vision: 'Hydro', weapon: 'Bow', isStandard: false, exemptCons: [1] },
+      { id: 'skirk', name: 'Skirk', rarity: 5, vision: 'Cryo', weapon: 'Sword', isStandard: false },
+      { id: 'sucrose', name: 'Sucrose', rarity: 4, vision: 'Anemo', weapon: 'Catalyst', isStandard: false },
+      { id: 'childe', name: 'Tartaglia', rarity: 5, vision: 'Hydro', weapon: 'Bow', isStandard: false, isAnniSelector: true, exemptCons: [1, 2] },
+      { id: 'thoma', name: 'Thoma', rarity: 4, vision: 'Pyro', weapon: 'Polearm', isStandard: false },
+      { id: 'tighnari', name: 'Tighnari', rarity: 5, vision: 'Dendro', weapon: 'Bow', isStandard: true, isYearlySelector: true, exemptCons: [1, 2] },
+      { id: 'traveler_anemo', name: 'Traveler (Anemo)', rarity: 5, vision: 'Anemo', weapon: 'Sword', isStandard: false, isTraveler: true },
+      { id: 'traveler_dendro', name: 'Traveler (Dendro)', rarity: 5, vision: 'Dendro', weapon: 'Sword', isStandard: false, isTraveler: true },
+      { id: 'traveler_electro', name: 'Traveler (Electro)', rarity: 5, vision: 'Electro', weapon: 'Sword', isStandard: false, isTraveler: true },
+      { id: 'traveler_geo', name: 'Traveler (Geo)', rarity: 5, vision: 'Geo', weapon: 'Sword', isStandard: false, isTraveler: true },
+      { id: 'traveler_hydro', name: 'Traveler (Hydro)', rarity: 5, vision: 'Hydro', weapon: 'Sword', isStandard: false, isTraveler: true },
+      { id: 'traveler_pyro', name: 'Traveler (Pyro)', rarity: 5, vision: 'Pyro', weapon: 'Sword', isStandard: false, isTraveler: true },
+      { id: 'varesa', name: 'Varesa', rarity: 5, vision: 'Electro', weapon: 'Catalyst', isStandard: false, isAnniSelector: true, exemptCons: [1] },
+      { id: 'varka', name: 'Varka', rarity: 5, vision: 'Anemo', weapon: 'Claymore', isStandard: false },
+      { id: 'venti', name: 'Venti', rarity: 5, vision: 'Anemo', weapon: 'Bow', isStandard: false },
+      { id: 'vesna', name: 'Vesna', rarity: 5, vision: 'Anemo', weapon: 'Sword', isStandard: false },
+      { id: 'vodyanitsa', name: 'Vodyanitsa', rarity: 5, vision: 'Hydro', weapon: 'Catalyst', isStandard: false },
+      { id: 'wanderer', name: 'Wanderer', rarity: 5, vision: 'Anemo', weapon: 'Catalyst', isStandard: false, exemptCons: [1] },
+      { id: 'wriothesley', name: 'Wriothesley', rarity: 5, vision: 'Cryo', weapon: 'Catalyst', isStandard: false, exemptCons: [1] },
+      { id: 'xiangling', name: 'Xiangling', rarity: 4, vision: 'Pyro', weapon: 'Polearm', isStandard: false },
+      { id: 'xiao', name: 'Xiao', rarity: 5, vision: 'Anemo', weapon: 'Polearm', isStandard: false, exemptCons: [1] },
+      { id: 'xianyun', name: 'Xianyun', rarity: 5, vision: 'Anemo', weapon: 'Catalyst', isStandard: false, exemptCons: [1] },
+      { id: 'xingqiu', name: 'Xingqiu', rarity: 4, vision: 'Hydro', weapon: 'Sword', isStandard: false },
+      { id: 'xinyan', name: 'Xinyan', rarity: 4, vision: 'Pyro', weapon: 'Claymore', isStandard: false },
+      { id: 'xilonen', name: 'Xilonen', rarity: 5, vision: 'Geo', weapon: 'Sword', isStandard: false },
+      { id: 'yae_miko', name: 'Yae Miko', rarity: 5, vision: 'Electro', weapon: 'Catalyst', isStandard: false, exemptCons: [1] },
+      { id: 'yanfei', name: 'Yanfei', rarity: 4, vision: 'Pyro', weapon: 'Catalyst', isStandard: false },
+      { id: 'yaoyao', name: 'Yaoyao', rarity: 4, vision: 'Dendro', weapon: 'Polearm', isStandard: false },
+      { id: 'yelan', name: 'Yelan', rarity: 5, vision: 'Hydro', weapon: 'Bow', isStandard: false },
+      { id: 'yoimiya', name: 'Yoimiya', rarity: 5, vision: 'Pyro', weapon: 'Bow', isStandard: false, exemptCons: [1] },
+      { id: 'mizuki', name: 'Yumemizuki Mizuki', rarity: 5, vision: 'Anemo', weapon: 'Catalyst', isStandard: true, isYearlySelector: true, exemptCons: [1, 2] },
+      { id: 'yun_jin', name: 'Yun Jin', rarity: 4, vision: 'Geo', weapon: 'Polearm', isStandard: false },
+      { id: 'zibai', name: 'Zibai', rarity: 5, vision: 'Geo', weapon: 'Sword', isStandard: false },
+      { id: 'zhongli', name: 'Zhongli', rarity: 5, vision: 'Geo', weapon: 'Polearm', isStandard: false }
+    ];
+
+    // Enforce strict alphabetical ordering
+    CHARACTERS_DB.sort((a, b) => a.name.localeCompare(b.name));
+
+    // Floor 12 First & Second Half state
+    const teamState = {
+      team1: {
+        name: 'First Half',
+        slots: [null, null, null, null]
+      },
+      team2: {
+        name: 'Second Half',
+        slots: [null, null, null, null]
+      }
+    };
+
+    let activeModalTarget = { teamNum: 1, slotIdx: 0 };
+    let currentElementFilter = 'ALL';
+    let currentWeaponFilter = 'ALL';
+    let currentRarityFilter = 'ALL';
+    let currentSearchTerm = '';
+  </script>
+
+  <script>
+    /*
+     * Tournament Rules Calculator:
+     * - 4★ Character: 0 Cost
+     * - 5★ Limited Character: 1 Cost base. +1 per Con.
+     *   - Baizhu, Chiori, Clorinde, Nilou, Tartaglia: C1 & C2 free (1.0 Cost for C2R0).
+     *   - Varesa: C1 free via Anniversary Selector (1.0 Cost for C1R0).
+     *   - Temper Thyself pool: C1 free (1.0 Cost for C1R0).
+     * - 5★ Standard Character: 0 Cost base. +0.5 per Con.
+     *   - Yearly Selector pool (Dehya, Diluc, Jean, Keqing, Mona, Qiqi, Tighnari, Mizuki):
+     *     Both C1 and C2 are 0 Cost! (0.0 Cost for C2R0). C3 is 0.5, C4 is 1.0, etc.
+     * - 4★ Weapon: 0 Cost regardless of refinement.
+     * - 5★ Limited Weapon: 1 Cost base. +1 per Refinement above R1.
+     * - 5★ Standard Weapon: 0 Cost base. +0.5 per Refinement above R1.
+     */
+    function calculateSlotCost(slot) {
+      if (!slot || !slot.character) return { total: 0, charCost: 0, weapCost: 0, breakdown: 'Empty Slot' };
+
+      const char = slot.character;
+      const c = slot.con || 0;
+      let charCost = 0;
+      let charNotes = [];
+
+      if (char.isTraveler) {
+        charCost = 0;
+        charNotes.push('Traveler (0.0)');
+      } else if (char.rarity === 4) {
+        charCost = 0;
+        charNotes.push('4★ Unit (0.0)');
+      } else if (char.isStandard) {
+        let conCost = 0;
+        for (let i = 1; i <= c; i++) {
+          if (char.exemptCons && char.exemptCons.includes(i)) {
+            continue; // Free constellation via event selector/Temper Thyself
+          }
+          conCost += 0.5;
+        }
+        charCost = conCost;
+        let exemptTag = '';
+        if (char.exemptCons && char.exemptCons.length > 0) {
+          const freed = char.exemptCons.filter(x => x <= c);
+          if (freed.length > 0) {
+            exemptTag = ` [C${freed.join('/C')} Free]`;
+          }
+        }
+        charNotes.push(`C${c} Standard 5★ (${charCost.toFixed(1)}${exemptTag})`);
+      } else {
+        let effectiveConCost = 0;
+        for (let i = 1; i <= c; i++) {
+          if (char.exemptCons && char.exemptCons.includes(i)) {
+            continue; // Free constellation via event selector/Temper Thyself
+          }
+          effectiveConCost += 1.0;
+        }
+        charCost = 1.0 + effectiveConCost;
+        let exemptTag = '';
+        if (char.exemptCons && char.exemptCons.length > 0) {
+          const freed = char.exemptCons.filter(x => x <= c);
+          if (freed.length > 0) {
+            exemptTag = ` [C${freed.join('/C')} Free]`;
+          }
+        }
+        charNotes.push(`C${c} Limited 5★ (1.0 base + ${effectiveConCost.toFixed(1)} cons${exemptTag})`);
+      }
+
+      // Weapon Cost Calculation
+      let weapCost = 0;
+      let weapNotes = [];
+      const wType = slot.weapType || '4-star';
+      const wRef = slot.weapRef || 1;
+
+      if (wType === '4-star') {
+        weapCost = 0;
+        weapNotes.push(`R${wRef} 4★ Weapon (0.0)`);
+      } else if (wType === '5-standard') {
+        weapCost = (wRef - 1) * 0.5;
+        weapNotes.push(`R${wRef} Standard 5★ (${weapCost.toFixed(1)})`);
+      } else if (wType === '5-limited') {
+        weapCost = 1.0 + (wRef - 1) * 1.0;
+        weapNotes.push(`R${wRef} Limited 5★ (${weapCost.toFixed(1)})`);
+      }
+
+      const total = charCost + weapCost;
+      return {
+        total,
+        charCost,
+        weapCost,
+        breakdown: `${charNotes.join('')} + ${weapNotes.join('')} = ${total.toFixed(1)} Cost`
+      };
+    }
+
+    function calculateTeamCost(teamNum) {
+      const team = teamNum === 1 ? teamState.team1 : teamState.team2;
+      let total = 0;
+      const slotBreakdowns = [];
+
+      team.slots.forEach((slot, idx) => {
+        const costObj = calculateSlotCost(slot);
+        total += costObj.total;
+        if (slot && slot.character) {
+          slotBreakdowns.push(`Slot ${idx + 1} (${slot.character.name}): ${costObj.breakdown}`);
+        } else {
+          slotBreakdowns.push(`Slot ${idx + 1}: Empty (0.0)`);
+        }
+      });
+
+      return {
+        total: Math.round(total * 10) / 10,
+        isLegal: total <= 5.0,
+        slotBreakdowns
+      };
+    }
+  </script>
+
+  <script>
+    function renderTeamSlots(teamNum) {
+      const container = document.getElementById(teamNum === 1 ? 't1-slots' : 't2-slots');
+      if (!container) return;
+      const team = teamNum === 1 ? teamState.team1 : teamState.team2;
+
+      container.innerHTML = team.slots.map((slot, idx) => {
+        if (!slot) {
+          return `
+            <div class="liquid-card rounded-2xl p-4 sm:p-5 border-dashed border-white/20 flex items-center justify-between gap-4 group hover:border-white/40 transition">
+              <div class="flex items-center gap-3.5">
+                <div class="w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-neutral-400 group-hover:text-white group-hover:scale-105 transition">
+                  <span class="text-xl font-light">+</span>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-neutral-300">Character Slot ${idx + 1}</h4>
+                  <p class="text-[11px] text-neutral-500">Unassigned • 0.0 Cost</p>
+                </div>
+              </div>
+              <button onclick="openCharModal(${teamNum}, ${idx})" class="liquid-btn px-4 py-2 rounded-xl text-xs font-semibold text-white flex items-center gap-1.5 hover:text-white">
+                <span>Select Character</span>
+                <span>→</span>
+              </button>
+            </div>
+          `;
+        }
+
+        const char = slot.character;
+        const color = VISION_COLORS[char.vision] || VISION_COLORS.Anemo;
+        const costObj = calculateSlotCost(slot);
+
+        // Constellation stepper buttons
+        const conOptions = [0, 1, 2, 3, 4, 5, 6].map(cNum => {
+          const isSelected = slot.con === cNum;
+          const isExempt = char.exemptCons && char.exemptCons.includes(cNum);
+          let extraClass = '';
+          if (isExempt && !isSelected) {
+            extraClass = 'border border-emerald-400/40 text-emerald-300';
+          }
+          return `
+            <button onclick="updateConstellation(${teamNum}, ${idx}, ${cNum})" 
+                    class="px-2 py-1 rounded-lg text-xs font-mono font-bold transition ${isSelected ? 'bg-white text-black shadow-md' : 'bg-white/[0.06] text-neutral-400 hover:text-white hover:bg-white/10'} ${extraClass}"
+                    title="Constellation ${cNum}${isExempt ? ' (Free via Event/Selector)' : ''}">
+              C${cNum}${isExempt ? `<span class="text-[8px] ${isSelected ? 'text-emerald-800 font-bold' : 'text-emerald-400'} font-sans block leading-none">free</span>` : ''}
+            </button>
+          `;
+        }).join('');
+
+        let eventTagHtml = '';
+        if (char.isYearlySelector) {
+          eventTagHtml = '<span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap" title="Free C1 & C2 via Yearly Standard Selector & Temper Thyself">✦ C1/C2 Free</span>';
+        } else if (char.exemptCons && char.exemptCons.length === 2 && !char.isStandard) {
+          eventTagHtml = '<span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap" title="Free C1 & C2 via Anniversary Selector & Temper Thyself">✦ C1/C2 Free</span>';
+        } else if (char.isAnniSelector) {
+          eventTagHtml = '<span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap" title="Free C1 via Anniversary Selector">✦ C1 Free</span>';
+        } else if (char.exemptCons && char.exemptCons.includes(1)) {
+          eventTagHtml = '<span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap" title="Free C1 via Temper Thyself Event">✦ C1 Free</span>';
+        }
+
+        return `
+          <div class="liquid-card rounded-2xl p-4 sm:p-5 border border-white/15 space-y-4">
+            
+            <!-- Character header & remove -->
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <div class="relative w-12 h-12 rounded-2xl bg-gradient-to-br ${color.bg} border ${color.border} flex items-center justify-center font-bold text-base ${color.text} shadow-md">
+                  <span>${char.name.substring(0, 2)}</span>
+                  <span class="absolute -bottom-1 -right-1 text-[9px] px-1.5 py-0.2 rounded-full font-bold bg-black/80 border border-white/20 text-neutral-300">
+                    ${char.rarity}★
+                  </span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <h4 class="text-sm sm:text-base font-bold text-white tracking-tight">${char.name}</h4>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${color.badge}">
+                      ${char.vision} • ${char.weapon}
+                    </span>
+                    ${char.isStandard ? '<span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-white/10 text-neutral-300 border border-white/15">Standard 5★</span>' : ''}
+                    ${eventTagHtml}
+                  </div>
+                  <p class="text-[11px] text-neutral-400 font-mono mt-0.5">
+                    Slot Cost: <strong class="text-white">${costObj.total.toFixed(1)}</strong> (${costObj.breakdown})
+                  </p>
+                </div>
+              </div>
+
+              <!-- Switch & Remove controls -->
+              <div class="flex items-center gap-1.5">
+                <button onclick="openCharModal(${teamNum}, ${idx})" class="liquid-btn px-2.5 py-1 rounded-lg text-[11px] text-neutral-300 hover:text-white font-medium" title="Swap Character">
+                  Swap
+                </button>
+                <button onclick="removeSlot(${teamNum}, ${idx})" class="w-7 h-7 rounded-lg liquid-btn text-neutral-400 hover:text-rose-400 flex items-center justify-center text-xs" title="Remove Character">
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            <!-- Controls Grid: Constellations & Weapon Configuration -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 border-t border-white/[0.06]">
+              
+              <!-- Constellations Stepper -->
+              <div>
+                <label class="block text-[10px] uppercase font-bold tracking-wider text-neutral-400 mb-1.5 flex items-center justify-between">
+                  <span>Constellations</span>
+                  ${char.exemptCons ? `<span class="text-emerald-300 text-[10px] font-medium">C${char.exemptCons.join('/C')} free</span>` : ''}
+                </label>
+                <div class="grid grid-cols-7 gap-1">
+                  ${conOptions}
+                </div>
+              </div>
+
+              <!-- Weapon Selection & Refinements -->
+              <div>
+                <label class="block text-[10px] uppercase font-bold tracking-wider text-neutral-400 mb-1.5 flex items-center justify-between">
+                  <span>Equipped Weapon</span>
+                  <span class="text-neutral-400 text-[10px]">${slot.weapType === '4-star' ? '0 Cost' : slot.weapType === '5-standard' ? '0 Base (+0.5/R)' : '1 Base (+1/R)'}</span>
+                </label>
+                <div class="flex items-center gap-2">
+                  <select onchange="updateWeaponType(${teamNum}, ${idx}, this.value)" class="liquid-select w-full px-3 py-2 text-xs">
+                    <option value="4-star" ${slot.weapType === '4-star' ? 'selected' : ''}>4★ Weapon (0 Cost)</option>
+                    <option value="5-standard" ${slot.weapType === '5-standard' ? 'selected' : ''}>5★ Standard (0 Base, +0.5/R)</option>
+                    <option value="5-limited" ${slot.weapType === '5-limited' ? 'selected' : ''}>5★ Limited (1 Base, +1/R)</option>
+                  </select>
+
+                  <select onchange="updateWeaponRefinement(${teamNum}, ${idx}, this.value)" class="liquid-select w-24 px-2.5 py-2 text-xs font-mono">
+                    <option value="1" ${slot.weapRef === 1 ? 'selected' : ''}>R1</option>
+                    <option value="2" ${slot.weapRef === 2 ? 'selected' : ''}>R2</option>
+                    <option value="3" ${slot.weapRef === 3 ? 'selected' : ''}>R3</option>
+                    <option value="4" ${slot.weapRef === 4 ? 'selected' : ''}>R4</option>
+                    <option value="5" ${slot.weapRef === 5 ? 'selected' : ''}>R5</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateTeamGauges(teamNum) {
+      const team = teamNum === 1 ? teamState.team1 : teamState.team2;
+      const res = calculateTeamCost(teamNum);
+      const prefix = teamNum === 1 ? 't1' : 't2';
+
+      // Cost displays
+      const costEl = document.getElementById(`${prefix}-cost-display`);
+      const miniCostEl = document.getElementById(`${prefix}-mini-cost`);
+      if (costEl) costEl.innerHTML = `${res.total.toFixed(1)} <span class="text-sm font-normal text-neutral-400 font-sans">/ 5.0</span>`;
+      if (miniCostEl) miniCostEl.innerHTML = `${res.total.toFixed(1)} <span class="text-xs font-normal text-neutral-400 font-sans">/ 5.0</span>`;
+
+      // Status Badges & Pills
+      const statusPill = document.getElementById(`${prefix}-status-pill`);
+      const miniBadge = document.getElementById(`${prefix}-badge`);
+      const alertBox = document.getElementById(`${prefix}-budget-alert`);
+      const alertText = document.getElementById(`${prefix}-budget-alert-text`);
+
+      if (res.isLegal) {
+        if (statusPill) {
+          statusPill.className = "inline-block text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-white/[0.08] text-neutral-300 border border-white/10";
+          statusPill.textContent = res.total === 5.0 ? "OPTIMAL MAX (5.0)" : "LEGAL ROSTER";
+        }
+        if (miniBadge) {
+          miniBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/[0.08] text-neutral-300 border border-white/10";
+          miniBadge.textContent = res.total === 5.0 ? "MAX 5.0" : "LEGAL";
+        }
+        if (alertBox) alertBox.classList.add('hidden');
+      } else {
+        const overBy = (res.total - 5.0).toFixed(1);
+        if (statusPill) {
+          statusPill.className = "inline-block text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 animate-pulse";
+          statusPill.textContent = "OVER BUDGET";
+        }
+        if (miniBadge) {
+          miniBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30";
+          miniBadge.textContent = "OVER LIMIT";
+        }
+        if (alertBox) {
+          alertBox.classList.remove('hidden');
+          alertText.textContent = `Illegal roster! Over the 5.0 cap by +${overBy} cost.`;
+        }
+      }
+
+      // Progress bar percentage
+      const pct = Math.min(100, (res.total / 5.0) * 100);
+      const fillBar = document.getElementById(`${prefix}-progress-fill`);
+      const miniBar = document.getElementById(`${prefix}-mini-bar`);
+
+      if (fillBar) fillBar.style.width = `${pct}%`;
+      if (miniBar) miniBar.style.width = `${pct}%`;
+
+      // Summary subtext
+      const filledCount = team.slots.filter(Boolean).length;
+      const sub = document.getElementById(`${prefix}-summary-sub`);
+      if (sub) sub.textContent = `${filledCount} of 4 Characters Selected`;
+
+      // Itemized breakdown update if open
+      const card = document.getElementById(`${prefix}-breakdown-card`);
+      if (card && !card.classList.contains('hidden')) {
+        card.innerHTML = `
+          <div class="font-bold text-white mb-1">Itemized Math Breakdown (Total: ${res.total.toFixed(1)} / 5.0):</div>
+          ${res.slotBreakdowns.map(line => `<div>• ${line}</div>`).join('')}
+        `;
+      }
+    }
+
+    function renderAll() {
+      renderTeamSlots(1);
+      renderTeamSlots(2);
+      updateTeamGauges(1);
+      updateTeamGauges(2);
+    }
+  </script>
+
+  <script>
+    function openCharModal(teamNum, slotIdx) {
+      activeModalTarget = { teamNum, slotIdx };
+      const teamLabel = teamNum === 1 ? 'First Half' : 'Second Half';
+      const badge = document.getElementById('modal-target-badge');
+      if (badge) badge.textContent = `${teamLabel}, Slot ${slotIdx + 1}`;
+
+      const modal = document.getElementById('char-modal');
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+      renderModalCharGrid();
+    }
+
+    function closeCharModal() {
+      const modal = document.getElementById('char-modal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => modal.classList.add('hidden'), 200);
+    }
+
+    function selectCharacter(charId) {
+      const char = CHARACTERS_DB.find(c => c.id === charId);
+      if (!char) return;
+
+      const { teamNum, slotIdx } = activeModalTarget;
+      const team = teamNum === 1 ? teamState.team1 : teamState.team2;
+
+      team.slots[slotIdx] = {
+        character: char,
+        con: 0,
+        weapType: '4-star',
+        weapRef: 1
+      };
+
+      closeCharModal();
+      renderAll();
+      showToast(`Selected ${char.name} for ${teamNum === 1 ? 'First Half' : 'Second Half'}`);
+    }
+
+    function removeSlot(teamNum, slotIdx) {
+      const team = teamNum === 1 ? teamState.team1 : teamState.team2;
+      team.slots[slotIdx] = null;
+      renderAll();
+    }
+
+    function updateConstellation(teamNum, slotIdx, conValue) {
+      const team = teamNum === 1 ? teamState.team1 : teamState.team2;
+      if (team.slots[slotIdx]) {
+        team.slots[slotIdx].con = conValue;
+        renderAll();
+      }
+    }
+
+    function updateWeaponType(teamNum, slotIdx, wType) {
+      const team = teamNum === 1 ? teamState.team1 : teamState.team2;
+      if (team.slots[slotIdx]) {
+        team.slots[slotIdx].weapType = wType;
+        renderAll();
+      }
+    }
+
+    function updateWeaponRefinement(teamNum, slotIdx, wRef) {
+      const team = teamNum === 1 ? teamState.team1 : teamState.team2;
+      if (team.slots[slotIdx]) {
+        team.slots[slotIdx].weapRef = parseInt(wRef, 10);
+        renderAll();
+      }
+    }
+
+    function toggleCostBreakdown(teamNum) {
+      const prefix = teamNum === 1 ? 't1' : 't2';
+      const card = document.getElementById(`${prefix}-breakdown-card`);
+      const btnText = document.getElementById(`${prefix}-breakdown-btn-text`);
+      if (!card) return;
+
+      if (card.classList.contains('hidden')) {
+        card.classList.remove('hidden');
+        btnText.textContent = "Hide Math Breakdown";
+        updateTeamGauges(teamNum);
+      } else {
+        card.classList.add('hidden');
+        btnText.textContent = "Show Math Breakdown";
+      }
+    }
+
+    function clearTeam(teamNum) {
+      const team = teamNum === 1 ? teamState.team1 : teamState.team2;
+      team.slots = [null, null, null, null];
+      renderAll();
+      showToast(`Cleared ${teamNum === 1 ? 'First Half' : 'Second Half'} slots`);
+    }
+
+    function swapTeams() {
+      const temp = teamState.team1.slots;
+      teamState.team1.slots = teamState.team2.slots;
+      teamState.team2.slots = temp;
+      renderAll();
+      showToast("Swapped First Half and Second Half lineups");
+    }
+  </script>
+
+  <script>
+    function renderModalCharGrid() {
+      const grid = document.getElementById('modal-char-grid');
+      if (!grid) return;
+
+      const filtered = CHARACTERS_DB.filter(c => {
+        if (currentElementFilter !== 'ALL' && c.vision !== currentElementFilter) return false;
+        if (currentWeaponFilter !== 'ALL' && c.weapon !== currentWeaponFilter) return false;
+        if (currentRarityFilter === '5-limited' && (c.rarity !== 5 || c.isStandard)) return false;
+        if (currentRarityFilter === '5-standard' && (!c.isStandard || c.rarity !== 5)) return false;
+        if (currentRarityFilter === '4-star' && c.rarity !== 4) return false;
+        if (currentSearchTerm) {
+          const match = c.name.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
+                        c.vision.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
+                        c.weapon.toLowerCase().includes(currentSearchTerm.toLowerCase());
+          if (!match) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center text-neutral-400 text-xs">
+            No characters match the selected filters.
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(c => {
+        const color = VISION_COLORS[c.vision] || VISION_COLORS.Anemo;
+        let costLabel = "1.0 Base";
+        if (c.rarity === 4 || c.isTraveler) costLabel = "0.0 Base";
+        else if (c.isStandard) costLabel = "0.0 Base";
+
+        let eventBadge = '';
+        if (c.exemptCons && c.exemptCons.length === 2) {
+          const source = c.isYearlySelector ? 'Yearly Selector + Temper Thyself' : 'Anniversary Selector + Temper Thyself';
+          eventBadge = `<span class="inline-flex items-center gap-1 text-[9px] font-bold font-mono px-1.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap tracking-tight" title="Free C1 & C2 via ${source}"><span class="w-1 h-1 rounded-full bg-emerald-400"></span>C1/C2 Free</span>`;
+        } else if (c.exemptCons && c.exemptCons.length === 1) {
+          const source = c.isAnniSelector ? 'Anniversary Selector' : 'Temper Thyself Event';
+          eventBadge = `<span class="inline-flex items-center gap-1 text-[9px] font-bold font-mono px-1.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap tracking-tight" title="Free C1 via ${source}"><span class="w-1 h-1 rounded-full bg-emerald-400"></span>C1 Free</span>`;
+        }
+
+        return `
+          <button onclick="selectCharacter('${c.id}')" class="liquid-card rounded-2xl p-2.5 sm:p-3 text-left border border-white/10 hover:border-white/30 transition group flex flex-col justify-between relative overflow-hidden min-h-[105px]">
+            <div class="flex items-start justify-between gap-1.5 w-full">
+              <div class="relative flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br ${color.bg} border ${color.border} flex items-center justify-center font-bold text-xs sm:text-sm ${color.text} shadow-sm group-hover:scale-105 transition">
+                ${c.name.substring(0, 2)}
+                <span class="absolute -bottom-1 -right-1 text-[8px] px-1 py-0.5 leading-none rounded-full font-bold bg-black/90 border border-white/20 text-neutral-300">
+                  ${c.rarity}★
+                </span>
+              </div>
+              <div class="flex flex-col items-end gap-1 min-w-0 flex-shrink-0">
+                <span class="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full ${color.badge} whitespace-nowrap">
+                  ${c.vision}
+                </span>
+                ${eventBadge}
+              </div>
+            </div>
+            
+            <div class="mt-2 pt-1.5 border-t border-white/[0.04] w-full">
+              <h5 class="text-xs font-bold text-white group-hover:text-neutral-200 transition truncate">${c.name}</h5>
+              <div class="flex items-center justify-between text-[10px] text-neutral-400 font-mono mt-0.5">
+                <span class="truncate">${c.weapon}</span>
+                <span class="text-neutral-500 shrink-0 ml-1 text-[9px]">${costLabel}</span>
+              </div>
+            </div>
+          </button>
+        `;
+      }).join('');
+    }
+  </script>
+
+  <script>
+    const SAMPLE_PRESETS = [
+      {
+        title: "Nefer Lunar-Bloom Sovereign (The 5.0 Blueprint)",
+        cost: "5.0",
+        description: "C0R1 Nefer (2.0) + C0R0 Lauma (1.0) + C0R0 Columbina (1.0) + C2R0 Nilou (1.0, C1/C2 free via Dual Event) — The definitive Lunar-Bloom archetype from the tournament regulations.",
+        roster: [
+          { id: 'nefer', con: 0, weapType: '5-limited', weapRef: 1 },
+          { id: 'lauma', con: 0, weapType: '4-star', weapRef: 1 },
+          { id: 'columbina', con: 0, weapType: '4-star', weapRef: 1 },
+          { id: 'nilou', con: 2, weapType: '4-star', weapRef: 1 }
+        ]
+      },
+      {
+        title: "Flins Lunar-Charged Hypercarry (Nod-Krai Storm)",
+        cost: "5.0",
+        description: "C0R1 Flins (2.0) + C0R0 Ineffa (1.0) + C0R0 Columbina (1.0) + C0R0 Xilonen (1.0) — Electro Lunar-Charged core combining Ineffa's reaction amplifier with Columbina's hydro aura.",
+        roster: [
+          { id: 'flins', con: 0, weapType: '5-limited', weapRef: 1 },
+          { id: 'ineffa', con: 0, weapType: '4-star', weapRef: 1 },
+          { id: 'columbina', con: 0, weapType: '4-star', weapRef: 1 },
+          { id: 'xilonen', con: 0, weapType: '4-star', weapRef: 1 }
+        ]
+      },
+      {
+        title: "Zibai Lunar-Crystallize Moonshard (Linnea Core)",
+        cost: "5.0",
+        description: "C0R1 Zibai (2.0) + C0R1 Linnea (2.0) + C0R0 Columbina (1.0) + C6R0 Gorou (0.0) — The premier Lunar-Crystallize speedrun lineup. Gorou provides triple-Geo DEF scaling, Linnea shreds Geo RES and heals with Lumi, and Columbina triggers off-field Lunar reactions.",
+        roster: [
+          { id: 'zibai', con: 0, weapType: '5-limited', weapRef: 1 },
+          { id: 'linnea', con: 0, weapType: '5-limited', weapRef: 1 },
+          { id: 'columbina', con: 0, weapType: '4-star', weapRef: 1 },
+          { id: 'gorou', con: 6, weapType: '4-star', weapRef: 1 }
+        ]
+      },
+      {
+        title: "Yumemizuki Mizuki Stellar Swirl (0-Cost Driver)",
+        cost: "5.0",
+        description: "C2R0 Mizuki (0.0, C1/C2 free via Yearly Selector + Temper Thyself) + C1R1 Odette (3.0) + C0R0 Furina (1.0) + C0R0 Escoffier (1.0) — High-tempo Swirl driver taking full advantage of Mizuki's 0.0-cost C2.",
+        roster: [
+          { id: 'mizuki', con: 2, weapType: '4-star', weapRef: 1 },
+          { id: 'odette', con: 1, weapType: '5-limited', weapRef: 1 },
+          { id: 'furina', con: 0, weapType: '4-star', weapRef: 1 },
+          { id: 'escoffier', con: 0, weapType: '4-star', weapRef: 1 }
+        ]
+      },
+      {
+        title: "Skirk Abyssal Speedrun (Fontaine Premier Core)",
+        cost: "5.0",
+        description: "C0R1 Skirk (2.0) + C0R0 Escoffier (1.0) + C0R0 Furina (1.0) + C0R0 Kazuha (1.0) — Tournament-standard Cryo burst frontload composition with max damage amplification.",
+        roster: [
+          { id: 'skirk', con: 0, weapType: '5-limited', weapRef: 1 },
+          { id: 'escoffier', con: 0, weapType: '4-star', weapRef: 1 },
+          { id: 'furina', con: 0, weapType: '4-star', weapRef: 1 },
+          { id: 'kazuha', con: 0, weapType: '4-star', weapRef: 1 }
+        ]
+      }
+    ];
+
+    function renderPresetsModal() {
+      const container = document.getElementById('presets-container');
+      if (!container) return;
+
+      container.innerHTML = SAMPLE_PRESETS.map((p, pIdx) => {
+        return `
+          <div class="liquid-card p-4 rounded-2xl border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="text-sm font-bold text-white">${p.title}</h4>
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-white/10 text-neutral-200 border border-white/15">
+                  ${p.cost} Cost
+                </span>
+              </div>
+              <p class="text-[11px] text-neutral-400 mt-1">${p.description}</p>
+            </div>
+            
+            <div class="flex items-center gap-2">
+              <button onclick="loadPreset(${pIdx}, 1)" class="liquid-btn px-3 py-1.5 rounded-xl text-xs font-semibold text-white">
+                Load 1st Half
+              </button>
+              <button onclick="loadPreset(${pIdx}, 2)" class="liquid-btn px-3 py-1.5 rounded-xl text-xs font-semibold text-neutral-300">
+                Load 2nd Half
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function loadPreset(presetIdx, teamNum) {
+      const p = SAMPLE_PRESETS[presetIdx];
+      if (!p) return;
+      const team = teamNum === 1 ? teamState.team1 : teamState.team2;
+
+      team.slots = p.roster.map(item => {
+        const char = CHARACTERS_DB.find(c => c.id === item.id);
+        return {
+          character: char,
+          con: item.con,
+          weapType: item.weapType,
+          weapRef: item.weapRef
+        };
+      });
+
+      closePresetsModal();
+      renderAll();
+      showToast(`Loaded "${p.title}" into ${teamNum === 1 ? 'First Half' : 'Second Half'}`);
+    }
+
+    function openPresetsModal() {
+      renderPresetsModal();
+      const modal = document.getElementById('presets-modal');
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+    }
+
+    function closePresetsModal() {
+      const modal = document.getElementById('presets-modal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => modal.classList.add('hidden'), 200);
+    }
+
+    function openRulesModal() {
+      const modal = document.getElementById('rules-modal');
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+    }
+
+    function closeRulesModal() {
+      const modal = document.getElementById('rules-modal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => modal.classList.add('hidden'), 200);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-msg');
+      if (!toast || !text) return;
+      text.textContent = msg;
+      toast.classList.remove('translate-y-12', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-12', 'opacity-0');
+      }, 3000);
+    }
+
+    function copyToClipboard(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast("Lineup copied to clipboard!");
+      } catch (err) {
+        showToast("Failed to copy lineup");
+      }
+      textArea.remove();
+    }
+
+    function generateShareText() {
+      const t1Res = calculateTeamCost(1);
+      const t2Res = calculateTeamCost(2);
+
+      let text = `=========================================\n`;
+      text += `GENSHIN IMPACT INDIA ABYSS TOURNAMENT\n`;
+      text += `Floor 12 Verified Lineup Submission\n`;
+      text += `=========================================\n\n`;
+
+      // Team 1
+      text += `[ FIRST HALF ] - Total: ${t1Res.total.toFixed(1)} / 5.0 Cost (${t1Res.isLegal ? 'LEGAL' : 'OVER BUDGET'})\n`;
+      teamState.team1.slots.forEach((slot, i) => {
+        if (slot && slot.character) {
+          const cost = calculateSlotCost(slot);
+          text += `  • Slot ${i + 1}: ${slot.character.name} (C${slot.con}) + R${slot.weapRef} ${slot.weapType} -> ${cost.total.toFixed(1)} Cost\n`;
+        } else {
+          text += `  • Slot ${i + 1}: [Empty Slot]\n`;
+        }
+      });
+      text += `\n`;
+
+      // Team 2
+      text += `[ SECOND HALF ] - Total: ${t2Res.total.toFixed(1)} / 5.0 Cost (${t2Res.isLegal ? 'LEGAL' : 'OVER BUDGET'})\n`;
+      teamState.team2.slots.forEach((slot, i) => {
+        if (slot && slot.character) {
+          const cost = calculateSlotCost(slot);
+          text += `  • Slot ${i + 1}: ${slot.character.name} (C${slot.con}) + R${slot.weapRef} ${slot.weapType} -> ${cost.total.toFixed(1)} Cost\n`;
+        } else {
+          text += `  • Slot ${i + 1}: [Empty Slot]\n`;
+        }
+      });
+
+      text += `\n=========================================\n`;
+      text += `Rules: 5.0 Cost Cap per Half | RTA Timing\n`;
+      return text;
+    }
+
+    function copySingleTeam(teamNum) {
+      const res = calculateTeamCost(teamNum);
+      const teamName = teamNum === 1 ? 'FIRST HALF' : 'SECOND HALF';
+      const slots = teamNum === 1 ? teamState.team1.slots : teamState.team2.slots;
+
+      let text = `Genshin Impact India Abyss Tournament - [ ${teamName} ] (Cost: ${res.total.toFixed(1)} / 5.0 - ${res.isLegal ? 'LEGAL' : 'OVER BUDGET'})\n`;
+      slots.forEach((slot, i) => {
+        if (slot && slot.character) {
+          const cost = calculateSlotCost(slot);
+          text += `• Slot ${i + 1}: ${slot.character.name} (C${slot.con}) + R${slot.weapRef} ${slot.weapType} (${cost.total.toFixed(1)} Cost)\n`;
+        } else {
+          text += `• Slot ${i + 1}: [Empty Slot]\n`;
+        }
+      });
+      copyToClipboard(text);
+    }
+  </script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('char-search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentSearchTerm = e.target.value.trim();
+          renderModalCharGrid();
+        });
+      }
+
+      const t1Input = document.getElementById('t1-name-input');
+      const t2Input = document.getElementById('t2-name-input');
+      if (t1Input) {
+        t1Input.addEventListener('input', (e) => {
+          document.getElementById('t1-mini-name').textContent = e.target.value || 'First Half';
+        });
+      }
+      if (t2Input) {
+        t2Input.addEventListener('input', (e) => {
+          document.getElementById('t2-mini-name').textContent = e.target.value || 'Second Half';
+        });
+      }
+
+      document.getElementById('rules-btn').addEventListener('click', openRulesModal);
+      document.getElementById('presets-btn').addEventListener('click', openPresetsModal);
+      document.getElementById('copy-match-btn').addEventListener('click', () => {
+        copyToClipboard(generateShareText());
+      });
+      document.getElementById('swap-teams-btn').addEventListener('click', swapTeams);
+      document.getElementById('reset-all-btn').addEventListener('click', () => {
+        teamState.team1.slots = [null, null, null, null];
+        teamState.team2.slots = [null, null, null, null];
+        renderAll();
+        showToast("Reset all slots to empty defaults");
+      });
+
+      const p1 = document.getElementById('team1-panel');
+      const p2 = document.getElementById('team2-panel');
+      const bBoth = document.getElementById('view-both-btn');
+      const b1 = document.getElementById('view-t1-btn');
+      const b2 = document.getElementById('view-t2-btn');
+
+      function setView(view) {
+        if (view === 'both') {
+          p1.classList.remove('hidden');
+          p2.classList.remove('hidden');
+          bBoth.className = "px-4 py-1 rounded-full font-semibold bg-white/20 text-white shadow transition border border-white/15";
+          b1.className = "px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
+          b2.className = "px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
+        } else if (view === 't1') {
+          p1.classList.remove('hidden');
+          p2.classList.add('hidden');
+          bBoth.className = "px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
+          b1.className = "px-4 py-1 rounded-full font-semibold bg-white/20 text-white shadow transition border border-white/15";
+          b2.className = "px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
+        } else {
+          p1.classList.add('hidden');
+          p2.classList.remove('hidden');
+          bBoth.className = "px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
+          b1.className = "px-4 py-1 rounded-full font-semibold text-neutral-400 hover:text-white transition";
+          b2.className = "px-4 py-1 rounded-full font-semibold bg-white/20 text-white shadow transition border border-white/15";
+        }
+      }
+
+      bBoth.addEventListener('click', () => setView('both'));
+      b1.addEventListener('click', () => setView('t1'));
+      b2.addEventListener('click', () => setView('t2'));
+
+      // Render clean empty slate on boot
+      renderAll();
+    });
+  </script>
+
+</body>
+</html>
