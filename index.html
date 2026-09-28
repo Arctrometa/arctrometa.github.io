@@ -562,7 +562,7 @@
       <div class="p-4 border-b border-white/[0.06] space-y-3 bg-black/30">
         <!-- Search bar with clear button -->
         <div class="relative">
-          <input type="text" id="char-search-input" placeholder="Search by character name (e.g., Baizhu, Clorinde, Tartaglia, Varesa, Nilou)..." class="w-full bg-white/[0.05] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-white/40 transition pl-9 pr-8">
+          <input type="text" id="char-search-input" placeholder="Search by character name (e.g., Linnea, Zibai, Baizhu, Clorinde, Nilou)..." class="w-full bg-white/[0.05] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-white/40 transition pl-9 pr-8">
           <svg class="w-4 h-4 text-neutral-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           <button id="char-search-clear" onclick="clearCharSearch()" class="hidden absolute right-3 top-2.5 text-neutral-400 hover:text-white text-xs font-bold w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">✕</button>
         </div>
@@ -719,12 +719,6 @@
 
     /*
      * Exhaustive character roster alphabetically sorted by name.
-     * 
-     * Anniversary Selector Limited Pool: Baizhu, Chiori, Clorinde, Nilou, Tartaglia, Varesa.
-     * - Baizhu, Chiori, Clorinde, Nilou, Tartaglia are also in Temper Thyself -> exemptCons: [1, 2] (both C1 & C2 free).
-     * - Varesa is only in Anniversary Selector -> exemptCons: [1] (C1 free).
-     * 
-     * Yearly Selector Standard Pool: Dehya, Diluc, Jean, Keqing, Mona, Qiqi, Tighnari, Yumemizuki Mizuki -> exemptCons: [1, 2].
      */
     const CHARACTERS_DB = [
       { id: 'aino', name: 'Aino', rarity: 4, vision: 'Hydro', weapon: 'Claymore', isStandard: false },
@@ -1206,6 +1200,91 @@
   </script>
 
   <script>
+    function renderModalCharGrid() {
+      const container = document.getElementById('modal-char-grid');
+      if (!container) return;
+
+      const filtered = CHARACTERS_DB.filter(char => {
+        // Search term match
+        if (currentSearchTerm) {
+          const term = currentSearchTerm.toLowerCase();
+          const matchName = char.name.toLowerCase().includes(term);
+          const matchElem = char.vision.toLowerCase().includes(term);
+          const matchWeapon = char.weapon.toLowerCase().includes(term);
+          if (!matchName && !matchElem && !matchWeapon) return false;
+        }
+
+        // Vision / Element filter
+        if (currentElementFilter !== 'ALL' && char.vision !== currentElementFilter) {
+          return false;
+        }
+
+        // Weapon filter
+        if (currentWeaponFilter !== 'ALL' && char.weapon !== currentWeaponFilter) {
+          return false;
+        }
+
+        // Rarity filter
+        if (currentRarityFilter === '5-limited') {
+          if (char.rarity !== 5 || char.isStandard || char.isTraveler) return false;
+        } else if (currentRarityFilter === '5-standard') {
+          if (!char.isStandard) return false;
+        } else if (currentRarityFilter === '4-star') {
+          if (char.rarity !== 4) return false;
+        }
+
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center text-neutral-400">
+            <p class="text-sm font-medium">No characters match your search or filters.</p>
+            <button onclick="clearAllFilters()" class="mt-3 liquid-btn px-4 py-1.5 rounded-full text-xs text-white">Reset Filters</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(char => {
+        const color = VISION_COLORS[char.vision] || VISION_COLORS.Anemo;
+        
+        let freeBadge = '';
+        if (char.isYearlySelector) {
+          freeBadge = '<span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap" title="Free C1 & C2 via Yearly Selector & Temper Thyself">C1/C2 Free</span>';
+        } else if (char.exemptCons && char.exemptCons.length === 2 && !char.isStandard) {
+          freeBadge = '<span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap" title="Free C1 & C2 via Anniversary Selector & Temper Thyself">C1/C2 Free</span>';
+        } else if (char.isAnniSelector) {
+          freeBadge = '<span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap" title="Free C1 via Anniversary Selector">C1 Free</span>';
+        } else if (char.exemptCons && char.exemptCons.includes(1)) {
+          freeBadge = '<span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap" title="Free C1 via Temper Thyself">C1 Free</span>';
+        }
+
+        return `
+          <button onclick="selectCharacter('${char.id}')" class="liquid-card p-3 rounded-2xl border border-white/10 hover:border-white/30 text-left transition flex flex-col justify-between group hover:scale-[1.02] active:scale-[0.98]">
+            <div class="flex items-start justify-between gap-2 w-full">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br ${color.bg} border ${color.border} flex items-center justify-center font-bold text-sm ${color.text} shadow-sm group-hover:scale-105 transition flex-shrink-0">
+                ${char.name.substring(0, 2)}
+              </div>
+              <span class="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded-full bg-white/[0.06] text-neutral-300 border border-white/10 flex-shrink-0">
+                ${char.rarity}★
+              </span>
+            </div>
+
+            <div class="mt-2.5 w-full">
+              <div class="font-bold text-xs text-white group-hover:text-white truncate" title="${char.name}">${char.name}</div>
+              <div class="flex items-center gap-1.5 mt-1 flex-wrap">
+                <span class="text-[10px] font-semibold ${color.text}">${char.vision}</span>
+                <span class="text-neutral-500 text-[10px]">•</span>
+                <span class="text-[10px] text-neutral-400">${char.weapon}</span>
+              </div>
+              ${freeBadge ? `<div class="mt-1.5">${freeBadge}</div>` : ''}
+            </div>
+          </button>
+        `;
+      }).join('');
+    }
+
     function openCharModal(teamNum, slotIdx) {
       activeModalTarget = { teamNum, slotIdx };
       const teamLabel = teamNum === 1 ? 'First Half' : 'Second Half';
@@ -1275,6 +1354,45 @@
       renderModalCharGrid();
     }
 
+    // Helper to check if a character or Traveler variant is already deployed on either half
+    function getCharacterUsage(charId) {
+      const char = CHARACTERS_DB.find(c => c.id === charId);
+      if (!char) return null;
+
+      // Check First Half
+      for (let i = 0; i < 4; i++) {
+        const s1 = teamState.team1.slots[i];
+        if (s1 && s1.character) {
+          const match = (s1.character.id === charId) || (char.isTraveler && s1.character.isTraveler);
+          if (match) {
+            return {
+              teamNum: 1,
+              slotIdx: i,
+              isSelf: (activeModalTarget.teamNum === 1 && activeModalTarget.slotIdx === i),
+              teamName: teamState.team1.name || 'First Half'
+            };
+          }
+        }
+      }
+
+      // Check Second Half
+      for (let i = 0; i < 4; i++) {
+        const s2 = teamState.team2.slots[i];
+        if (s2 && s2.character) {
+          const match = (s2.character.id === charId) || (char.isTraveler && s2.character.isTraveler);
+          if (match) {
+            return {
+              teamNum: 2,
+              slotIdx: i,
+              isSelf: (activeModalTarget.teamNum === 2 && activeModalTarget.slotIdx === i),
+              teamName: teamState.team2.name || 'Second Half'
+            };
+          }
+        }
+      }
+      return null;
+    }
+
     function renderModalCharGrid() {
       const grid = document.getElementById('modal-char-grid');
       if (!grid) return;
@@ -1317,10 +1435,17 @@
 
       grid.innerHTML = filtered.map(char => {
         const color = VISION_COLORS[char.vision] || VISION_COLORS.Anemo;
+        const usage = getCharacterUsage(char.id);
+        const isConflict = usage && !usage.isSelf;
 
         // Event / Selector free constellation badges
         let freeTagHtml = '';
-        if (char.isYearlySelector) {
+        if (isConflict) {
+          const locationLabel = usage.teamNum === activeModalTarget.teamNum
+            ? `Slot ${usage.slotIdx + 1}`
+            : (usage.teamNum === 1 ? '1st Half' : '2nd Half');
+          freeTagHtml = `<span class="inline-flex items-center gap-1 text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 whitespace-nowrap tracking-tight"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>Deployed (${locationLabel})</span>`;
+        } else if (char.isYearlySelector) {
           freeTagHtml = `<span class="inline-flex items-center gap-1 text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap tracking-tight" title="Free C1 & C2 via Yearly Selector + Temper Thyself"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>C1/C2 Free</span>`;
         } else if (char.exemptCons && char.exemptCons.length === 2 && !char.isStandard) {
           freeTagHtml = `<span class="inline-flex items-center gap-1 text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap tracking-tight" title="Free C1 & C2 via Anniversary Selector + Temper Thyself"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>C1/C2 Free</span>`;
@@ -1335,8 +1460,12 @@
           baseCostText = '0.0 Base';
         }
 
+        const cardStateClass = isConflict 
+          ? 'opacity-45 hover:opacity-75 border-rose-500/20 bg-rose-950/10'
+          : 'border-white/10 hover:border-white/30';
+
         return `
-          <button onclick="selectCharacter('${char.id}')" class="liquid-card p-3 rounded-2xl border border-white/10 hover:border-white/30 text-left transition flex flex-col justify-between group active:scale-[0.98]">
+          <button onclick="selectCharacter('${char.id}')" class="liquid-card p-3 rounded-2xl border ${cardStateClass} text-left transition flex flex-col justify-between group active:scale-[0.98]">
             <div class="flex items-start gap-2.5">
               <div class="w-10 h-10 rounded-xl bg-gradient-to-br ${color.bg} border ${color.border} flex items-center justify-center font-bold text-xs ${color.text} flex-shrink-0 group-hover:scale-105 transition shadow-sm">
                 <span>${char.name.substring(0, 2)}</span>
@@ -1369,6 +1498,16 @@
     function selectCharacter(charId) {
       const char = CHARACTERS_DB.find(c => c.id === charId);
       if (!char) return;
+
+      // Duplicate deployment verification
+      const usage = getCharacterUsage(charId);
+      if (usage && !usage.isSelf) {
+        const conflictLocation = usage.teamNum === activeModalTarget.teamNum
+          ? `${usage.teamName} (Slot ${usage.slotIdx + 1})`
+          : usage.teamName;
+        showToast(`Cannot select ${char.name} — already deployed in ${conflictLocation}!`);
+        return;
+      }
 
       const { teamNum, slotIdx } = activeModalTarget;
       const team = teamNum === 1 ? teamState.team1 : teamState.team2;
@@ -1446,13 +1585,6 @@
       showToast("Swapped First Half and Second Half lineups");
     }
 
-    window.setElementFilter = setElementFilter;
-    window.setWeaponFilter = setWeaponFilter;
-    window.setRarityFilter = setRarityFilter;
-    window.clearCharSearch = clearCharSearch;
-    window.openCharModal = openCharModal;
-    window.closeCharModal = closeCharModal;
-    window.renderModalCharGrid = renderModalCharGrid;
     window.selectCharacter = selectCharacter;
     window.removeSlot = removeSlot;
     window.updateConstellation = updateConstellation;
@@ -1468,7 +1600,7 @@
       {
         title: "Nefer Lunar-Bloom Sovereign (The 5.0 Blueprint)",
         cost: "5.0",
-        description: "C0R1 Nefer (2.0) + C0R0 Lauma (1.0) + C0R0 Columbina (1.0) + C2R0 Nilou (1.0, C1/C2 free via Dual Event) — The definitive Lunar-Bloom archetype from the tournament regulations.",
+        description: "C0R1 Nefer (2.0) + C0R0 Lauma (1.0) + C0R0 Columbina (1.0) + C2R0 Nilou (1.0, C1/C2 free via Dual Event) — The definitive Lunar-Bloom archetype from tournament regulations.",
         roster: [
           { id: 'nefer', con: 0, weapType: '5-limited', weapRef: 1 },
           { id: 'lauma', con: 0, weapType: '4-star', weapRef: 1 },
@@ -1556,6 +1688,21 @@
       const p = SAMPLE_PRESETS[presetIdx];
       if (!p) return;
       const team = teamNum === 1 ? teamState.team1 : teamState.team2;
+      const otherTeam = teamNum === 1 ? teamState.team2 : teamState.team1;
+
+      // Automatically unassign conflicting duplicates from the opposite half
+      let clearedCount = 0;
+      p.roster.forEach(item => {
+        otherTeam.slots.forEach((s, idx) => {
+          if (s && s.character) {
+            const isTravelerClash = (item.id.startsWith('traveler') && s.character.isTraveler);
+            if (s.character.id === item.id || isTravelerClash) {
+              otherTeam.slots[idx] = null;
+              clearedCount++;
+            }
+          }
+        });
+      });
 
       team.slots = p.roster.map(item => {
         const char = CHARACTERS_DB.find(c => c.id === item.id);
@@ -1569,7 +1716,8 @@
 
       closePresetsModal();
       renderAll();
-      showToast(`Loaded "${p.title}" into ${teamNum === 1 ? 'First Half' : 'Second Half'}`);
+      const duplicateNotice = clearedCount > 0 ? ` (unassigned ${clearedCount} duplicate from other half)` : '';
+      showToast(`Loaded "${p.title}" into ${teamNum === 1 ? 'First Half' : 'Second Half'}${duplicateNotice}`);
     }
 
     function openPresetsModal() {
@@ -1679,6 +1827,13 @@
       });
       copyToClipboard(text);
     }
+
+    window.loadPreset = loadPreset;
+    window.openPresetsModal = openPresetsModal;
+    window.closePresetsModal = closePresetsModal;
+    window.openRulesModal = openRulesModal;
+    window.closeRulesModal = closeRulesModal;
+    window.copySingleTeam = copySingleTeam;
   </script>
 
   <script>
