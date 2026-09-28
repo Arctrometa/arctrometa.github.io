@@ -560,42 +560,43 @@
 
       <!-- Filter Controls -->
       <div class="p-4 border-b border-white/[0.06] space-y-3 bg-black/30">
-        <!-- Search bar -->
+        <!-- Search bar with clear button -->
         <div class="relative">
-          <input type="text" id="char-search-input" placeholder="Search by character name (e.g., Baizhu, Clorinde, Tartaglia, Varesa, Nilou)..." class="w-full bg-white/[0.05] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-white/40 transition pl-9">
+          <input type="text" id="char-search-input" placeholder="Search by character name (e.g., Baizhu, Clorinde, Tartaglia, Varesa, Nilou)..." class="w-full bg-white/[0.05] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-white/40 transition pl-9 pr-8">
           <svg class="w-4 h-4 text-neutral-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <button id="char-search-clear" onclick="clearCharSearch()" class="hidden absolute right-3 top-2.5 text-neutral-400 hover:text-white text-xs font-bold w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">✕</button>
         </div>
 
         <!-- Vision / Element Pills -->
         <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
-          <button onclick="setElementFilter('ALL')" class="elem-filter-btn px-3 py-1 rounded-full font-semibold bg-white/20 text-white border border-white/20 transition">All Visions</button>
-          <button onclick="setElementFilter('Pyro')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Pyro</button>
-          <button onclick="setElementFilter('Hydro')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Hydro</button>
-          <button onclick="setElementFilter('Anemo')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Anemo</button>
-          <button onclick="setElementFilter('Electro')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Electro</button>
-          <button onclick="setElementFilter('Dendro')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Dendro</button>
-          <button onclick="setElementFilter('Cryo')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Cryo</button>
-          <button onclick="setElementFilter('Geo')" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-300 hover:bg-white/10 transition">Geo</button>
+          <button onclick="setElementFilter('ALL')" data-filter="ALL" class="elem-filter-btn px-3 py-1 rounded-full font-semibold bg-white/20 text-white border border-white/20 transition shadow-sm">All Visions</button>
+          <button onclick="setElementFilter('Pyro')" data-filter="Pyro" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Pyro</button>
+          <button onclick="setElementFilter('Hydro')" data-filter="Hydro" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Hydro</button>
+          <button onclick="setElementFilter('Anemo')" data-filter="Anemo" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Anemo</button>
+          <button onclick="setElementFilter('Electro')" data-filter="Electro" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Electro</button>
+          <button onclick="setElementFilter('Dendro')" data-filter="Dendro" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Dendro</button>
+          <button onclick="setElementFilter('Cryo')" data-filter="Cryo" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Cryo</button>
+          <button onclick="setElementFilter('Geo')" data-filter="Geo" class="elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition">Geo</button>
         </div>
 
         <!-- Weapon & Rarity Pills -->
         <div class="flex flex-wrap items-center justify-between gap-2 text-xs pt-1 border-t border-white/[0.04]">
           <div class="flex items-center gap-1.5 overflow-x-auto">
             <span class="text-[11px] text-neutral-400 mr-1 font-medium">Weapon:</span>
-            <button onclick="setWeaponFilter('ALL')" class="weap-filter-btn px-2.5 py-0.5 rounded-md font-semibold bg-white/15 text-white transition">All</button>
-            <button onclick="setWeaponFilter('Sword')" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white transition">Sword</button>
-            <button onclick="setWeaponFilter('Claymore')" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white transition">Claymore</button>
-            <button onclick="setWeaponFilter('Polearm')" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white transition">Polearm</button>
-            <button onclick="setWeaponFilter('Bow')" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white transition">Bow</button>
-            <button onclick="setWeaponFilter('Catalyst')" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white transition">Catalyst</button>
+            <button onclick="setWeaponFilter('ALL')" data-filter="ALL" class="weap-filter-btn px-2.5 py-0.5 rounded-md font-semibold bg-white/20 text-white border border-white/20 transition shadow-sm">All</button>
+            <button onclick="setWeaponFilter('Sword')" data-filter="Sword" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">Sword</button>
+            <button onclick="setWeaponFilter('Claymore')" data-filter="Claymore" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">Claymore</button>
+            <button onclick="setWeaponFilter('Polearm')" data-filter="Polearm" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">Polearm</button>
+            <button onclick="setWeaponFilter('Bow')" data-filter="Bow" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">Bow</button>
+            <button onclick="setWeaponFilter('Catalyst')" data-filter="Catalyst" class="weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">Catalyst</button>
           </div>
 
           <div class="flex items-center gap-1.5">
             <span class="text-[11px] text-neutral-400 mr-1 font-medium">Class:</span>
-            <button onclick="setRarityFilter('ALL')" class="rarity-filter-btn px-2 py-0.5 rounded-md bg-white/15 text-white font-semibold transition">All</button>
-            <button onclick="setRarityFilter('5-limited')" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-300 hover:text-white transition">5★ Limited</button>
-            <button onclick="setRarityFilter('5-standard')" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-300 hover:text-white transition">5★ Standard</button>
-            <button onclick="setRarityFilter('4-star')" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-300 hover:text-white transition">4★ Units</button>
+            <button onclick="setRarityFilter('ALL')" data-filter="ALL" class="rarity-filter-btn px-2 py-0.5 rounded-md bg-white/20 text-white font-semibold border border-white/20 transition shadow-sm">All</button>
+            <button onclick="setRarityFilter('5-limited')" data-filter="5-limited" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">5★ Limited</button>
+            <button onclick="setRarityFilter('5-standard')" data-filter="5-standard" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">5★ Standard</button>
+            <button onclick="setRarityFilter('4-star')" data-filter="4-star" class="rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition">4★ Units</button>
           </div>
         </div>
       </div>
@@ -1214,6 +1215,7 @@
       const modal = document.getElementById('char-modal');
       modal.classList.remove('hidden');
       setTimeout(() => modal.classList.remove('opacity-0'), 10);
+      updateFilterUI();
       renderModalCharGrid();
     }
 
@@ -1221,6 +1223,147 @@
       const modal = document.getElementById('char-modal');
       modal.classList.add('opacity-0');
       setTimeout(() => modal.classList.add('hidden'), 200);
+    }
+
+    function updateFilterUI() {
+      document.querySelectorAll('.elem-filter-btn').forEach(btn => {
+        const isMatch = btn.getAttribute('data-filter') === currentElementFilter;
+        btn.className = isMatch 
+          ? "elem-filter-btn px-3 py-1 rounded-full font-semibold bg-white/20 text-white border border-white/20 transition shadow-sm"
+          : "elem-filter-btn px-3 py-1 rounded-full font-medium text-neutral-400 hover:text-white hover:bg-white/10 transition";
+      });
+
+      document.querySelectorAll('.weap-filter-btn').forEach(btn => {
+        const isMatch = btn.getAttribute('data-filter') === currentWeaponFilter;
+        btn.className = isMatch
+          ? "weap-filter-btn px-2.5 py-0.5 rounded-md font-semibold bg-white/20 text-white border border-white/20 transition shadow-sm"
+          : "weap-filter-btn px-2.5 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition";
+      });
+
+      document.querySelectorAll('.rarity-filter-btn').forEach(btn => {
+        const isMatch = btn.getAttribute('data-filter') === currentRarityFilter;
+        btn.className = isMatch
+          ? "rarity-filter-btn px-2 py-0.5 rounded-md bg-white/20 text-white font-semibold border border-white/20 transition shadow-sm"
+          : "rarity-filter-btn px-2 py-0.5 rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition";
+      });
+    }
+
+    function setElementFilter(elem) {
+      currentElementFilter = (currentElementFilter === elem && elem !== 'ALL') ? 'ALL' : elem;
+      updateFilterUI();
+      renderModalCharGrid();
+    }
+
+    function setWeaponFilter(weap) {
+      currentWeaponFilter = (currentWeaponFilter === weap && weap !== 'ALL') ? 'ALL' : weap;
+      updateFilterUI();
+      renderModalCharGrid();
+    }
+
+    function setRarityFilter(rarity) {
+      currentRarityFilter = (currentRarityFilter === rarity && rarity !== 'ALL') ? 'ALL' : rarity;
+      updateFilterUI();
+      renderModalCharGrid();
+    }
+
+    function clearCharSearch() {
+      currentSearchTerm = '';
+      const input = document.getElementById('char-search-input');
+      const clearBtn = document.getElementById('char-search-clear');
+      if (input) input.value = '';
+      if (clearBtn) clearBtn.classList.add('hidden');
+      renderModalCharGrid();
+    }
+
+    function renderModalCharGrid() {
+      const grid = document.getElementById('modal-char-grid');
+      if (!grid) return;
+
+      const filtered = CHARACTERS_DB.filter(char => {
+        // Vision / Element filter
+        if (currentElementFilter !== 'ALL' && char.vision !== currentElementFilter) return false;
+        
+        // Weapon filter
+        if (currentWeaponFilter !== 'ALL' && char.weapon !== currentWeaponFilter) return false;
+
+        // Rarity / Class filter
+        if (currentRarityFilter === '5-limited') {
+          if (char.rarity !== 5 || char.isStandard || char.isTraveler) return false;
+        } else if (currentRarityFilter === '5-standard') {
+          if (!char.isStandard) return false;
+        } else if (currentRarityFilter === '4-star') {
+          if (char.rarity !== 4) return false;
+        }
+
+        // Search query filter
+        if (currentSearchTerm) {
+          const term = currentSearchTerm.toLowerCase();
+          if (!char.name.toLowerCase().includes(term)) return false;
+        }
+
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center text-neutral-400 space-y-2">
+            <span class="text-3xl block">🔍</span>
+            <p class="font-medium text-sm text-neutral-300">No characters found</p>
+            <p class="text-xs text-neutral-500">Try adjusting your search query, vision, or weapon filters.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(char => {
+        const color = VISION_COLORS[char.vision] || VISION_COLORS.Anemo;
+
+        // Event / Selector free constellation badges
+        let freeTagHtml = '';
+        if (char.isYearlySelector) {
+          freeTagHtml = `<span class="inline-flex items-center gap-1 text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap tracking-tight" title="Free C1 & C2 via Yearly Selector + Temper Thyself"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>C1/C2 Free</span>`;
+        } else if (char.exemptCons && char.exemptCons.length === 2 && !char.isStandard) {
+          freeTagHtml = `<span class="inline-flex items-center gap-1 text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap tracking-tight" title="Free C1 & C2 via Anniversary Selector + Temper Thyself"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>C1/C2 Free</span>`;
+        } else if (char.isAnniSelector) {
+          freeTagHtml = `<span class="inline-flex items-center gap-1 text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap tracking-tight" title="Free C1 via Anniversary Selector"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>C1 Free</span>`;
+        } else if (char.exemptCons && char.exemptCons.includes(1)) {
+          freeTagHtml = `<span class="inline-flex items-center gap-1 text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap tracking-tight" title="Free C1 via Temper Thyself Event"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>C1 Free</span>`;
+        }
+
+        let baseCostText = '1.0 Cost';
+        if (char.isTraveler || char.rarity === 4 || char.isStandard) {
+          baseCostText = '0.0 Base';
+        }
+
+        return `
+          <button onclick="selectCharacter('${char.id}')" class="liquid-card p-3 rounded-2xl border border-white/10 hover:border-white/30 text-left transition flex flex-col justify-between group active:scale-[0.98]">
+            <div class="flex items-start gap-2.5">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br ${color.bg} border ${color.border} flex items-center justify-center font-bold text-xs ${color.text} flex-shrink-0 group-hover:scale-105 transition shadow-sm">
+                <span>${char.name.substring(0, 2)}</span>
+              </div>
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between gap-1">
+                  <h4 class="text-xs font-bold text-white truncate group-hover:text-white transition" title="${char.name}">${char.name}</h4>
+                  <span class="text-[9px] font-bold text-neutral-400 flex-shrink-0">${char.rarity}★</span>
+                </div>
+                <div class="flex items-center gap-1 mt-0.5 flex-wrap">
+                  <span class="text-[9px] font-semibold px-1.5 py-0.2 rounded-full ${color.badge}">
+                    ${char.vision}
+                  </span>
+                  <span class="text-[9px] text-neutral-400 font-medium">
+                    ${char.weapon}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-2.5 pt-2 border-t border-white/[0.06] flex items-center justify-between gap-1 flex-wrap">
+              <span class="text-[10px] font-mono font-medium text-neutral-400">${baseCostText}</span>
+              ${freeTagHtml}
+            </div>
+          </button>
+        `;
+      }).join('');
     }
 
     function selectCharacter(charId) {
@@ -1302,80 +1445,22 @@
       renderAll();
       showToast("Swapped First Half and Second Half lineups");
     }
-  </script>
 
-  <script>
-    function renderModalCharGrid() {
-      const grid = document.getElementById('modal-char-grid');
-      if (!grid) return;
-
-      const filtered = CHARACTERS_DB.filter(c => {
-        if (currentElementFilter !== 'ALL' && c.vision !== currentElementFilter) return false;
-        if (currentWeaponFilter !== 'ALL' && c.weapon !== currentWeaponFilter) return false;
-        if (currentRarityFilter === '5-limited' && (c.rarity !== 5 || c.isStandard)) return false;
-        if (currentRarityFilter === '5-standard' && (!c.isStandard || c.rarity !== 5)) return false;
-        if (currentRarityFilter === '4-star' && c.rarity !== 4) return false;
-        if (currentSearchTerm) {
-          const match = c.name.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
-                        c.vision.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
-                        c.weapon.toLowerCase().includes(currentSearchTerm.toLowerCase());
-          if (!match) return false;
-        }
-        return true;
-      });
-
-      if (filtered.length === 0) {
-        grid.innerHTML = `
-          <div class="col-span-full py-12 text-center text-neutral-400 text-xs">
-            No characters match the selected filters.
-          </div>
-        `;
-        return;
-      }
-
-      grid.innerHTML = filtered.map(c => {
-        const color = VISION_COLORS[c.vision] || VISION_COLORS.Anemo;
-        let costLabel = "1.0 Base";
-        if (c.rarity === 4 || c.isTraveler) costLabel = "0.0 Base";
-        else if (c.isStandard) costLabel = "0.0 Base";
-
-        let eventBadge = '';
-        if (c.exemptCons && c.exemptCons.length === 2) {
-          const source = c.isYearlySelector ? 'Yearly Selector + Temper Thyself' : 'Anniversary Selector + Temper Thyself';
-          eventBadge = `<span class="inline-flex items-center gap-1 text-[9px] font-bold font-mono px-1.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap tracking-tight" title="Free C1 & C2 via ${source}"><span class="w-1 h-1 rounded-full bg-emerald-400"></span>C1/C2 Free</span>`;
-        } else if (c.exemptCons && c.exemptCons.length === 1) {
-          const source = c.isAnniSelector ? 'Anniversary Selector' : 'Temper Thyself Event';
-          eventBadge = `<span class="inline-flex items-center gap-1 text-[9px] font-bold font-mono px-1.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 whitespace-nowrap tracking-tight" title="Free C1 via ${source}"><span class="w-1 h-1 rounded-full bg-emerald-400"></span>C1 Free</span>`;
-        }
-
-        return `
-          <button onclick="selectCharacter('${c.id}')" class="liquid-card rounded-2xl p-2.5 sm:p-3 text-left border border-white/10 hover:border-white/30 transition group flex flex-col justify-between relative overflow-hidden min-h-[105px]">
-            <div class="flex items-start justify-between gap-1.5 w-full">
-              <div class="relative flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br ${color.bg} border ${color.border} flex items-center justify-center font-bold text-xs sm:text-sm ${color.text} shadow-sm group-hover:scale-105 transition">
-                ${c.name.substring(0, 2)}
-                <span class="absolute -bottom-1 -right-1 text-[8px] px-1 py-0.5 leading-none rounded-full font-bold bg-black/90 border border-white/20 text-neutral-300">
-                  ${c.rarity}★
-                </span>
-              </div>
-              <div class="flex flex-col items-end gap-1 min-w-0 flex-shrink-0">
-                <span class="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full ${color.badge} whitespace-nowrap">
-                  ${c.vision}
-                </span>
-                ${eventBadge}
-              </div>
-            </div>
-            
-            <div class="mt-2 pt-1.5 border-t border-white/[0.04] w-full">
-              <h5 class="text-xs font-bold text-white group-hover:text-neutral-200 transition truncate">${c.name}</h5>
-              <div class="flex items-center justify-between text-[10px] text-neutral-400 font-mono mt-0.5">
-                <span class="truncate">${c.weapon}</span>
-                <span class="text-neutral-500 shrink-0 ml-1 text-[9px]">${costLabel}</span>
-              </div>
-            </div>
-          </button>
-        `;
-      }).join('');
-    }
+    window.setElementFilter = setElementFilter;
+    window.setWeaponFilter = setWeaponFilter;
+    window.setRarityFilter = setRarityFilter;
+    window.clearCharSearch = clearCharSearch;
+    window.openCharModal = openCharModal;
+    window.closeCharModal = closeCharModal;
+    window.renderModalCharGrid = renderModalCharGrid;
+    window.selectCharacter = selectCharacter;
+    window.removeSlot = removeSlot;
+    window.updateConstellation = updateConstellation;
+    window.updateWeaponType = updateWeaponType;
+    window.updateWeaponRefinement = updateWeaponRefinement;
+    window.toggleCostBreakdown = toggleCostBreakdown;
+    window.clearTeam = clearTeam;
+    window.swapTeams = swapTeams;
   </script>
 
   <script>
@@ -1599,9 +1684,18 @@
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const searchInput = document.getElementById('char-search-input');
+      const searchClearBtn = document.getElementById('char-search-clear');
+
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
           currentSearchTerm = e.target.value.trim();
+          if (searchClearBtn) {
+            if (currentSearchTerm.length > 0) {
+              searchClearBtn.classList.remove('hidden');
+            } else {
+              searchClearBtn.classList.add('hidden');
+            }
+          }
           renderModalCharGrid();
         });
       }
